@@ -1,0 +1,33 @@
+.REGISTRATION_USERINPUT_INVALID {
+    border: 1px solid red;
+}
+
+.REGISTRATION_USERINPUT_HIDDENMESSAGE {
+    visibility: hidden;
+}
+
+.REGISTRATION_USERINPUT_SHOWMESSAGE {
+    visibility: visible;
+}
+
+.REGISTRATION_TITLE .form-group {
+    margin-top: 2em;
+}
+
+/*Style for registration button and clear button*/
+#registration_btns {
+    width: auto;
+    height: auto;
+    background-color: aquamarine;
+}
+
+#registration_btn {
+    float: left;
+}
+
+#clear_btn {
+    float: left;
+    margin-left: 3em;
+}
+
+/**/

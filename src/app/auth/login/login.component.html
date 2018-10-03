@@ -1,0 +1,34 @@
+<div id="login-form">
+  <!--ngForm contains the validation for entire form-->
+  <form #loginForm="ngForm">
+    {{ loginForm.form.valid }}
+    <!--USERNAME-->
+    <div class="form-group">
+      <label>USERNAME</label><br/>
+      <input type="text" #username="ngModel"
+      class="form-control" [class.is-invalid]="username.invalid && username.touched"
+      id="login-username" name="login-username" required
+      [(ngModel)]="loginModel.username">
+      <!--Error message for invalid username input-->
+      <div *ngIf="username.errors && (username.invalid || username.touched)" [class.d-none]="username.valid || username.untouched">
+        <small class="text-danger" *ngIf="username.errors.required">Username is required</small>
+      </div>
+    </div>
+
+    <!--PASSWORD-->
+    <div class="form-group">
+      <label>PASSWORD</label><br/>
+      <input type="password" #pwd="ngModel"
+      class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched"
+      id="login-pwd" name="login-pwd" required
+      [(ngModel)]="loginModel.pwd">
+      <!--Error message for invalid password input-->
+      <div *ngIf="pwd.errors && (pwd.invalid || pwd.touched)" [class.d-none]="pwd.valid || pwd.untouched">
+        <small class="text-danger" *ngIf="pwd.errors.required">Password is required</small>
+      </div>
+    </div>
+
+    <!--LOGIN BUTTON-->
+    <button [disabled]="loginForm.form.invalid" class="btn btn-primary">LOG IN</button>
+  </form>
+</div>

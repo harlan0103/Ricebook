@@ -1,0 +1,60 @@
+.MAINFRAME {
+    width: 80%;
+    height: auto;
+    background-color: antiquewhite;
+    margin: auto;
+    overflow: hidden;
+}
+
+.MAIN_TITLE {
+    width: 50%;
+    height: 5em;
+    background-color: aqua;
+    margin: auto;
+    margin-top: 2em;
+    overflow: hidden;
+}
+
+.MAIN_TITLE_IMG {
+    width: 5em;
+    height: 5em;
+    float: left;
+    background-color: deepskyblue;
+}
+
+.MAIN_TITLE_TEXT {
+    width: 70%;
+    height: 5em;
+    float: left;
+    margin-left: 3em;
+    background-color: azure;
+}
+
+.MAIN_TITLE_TEXT span {
+    width: 100%;
+    height: 100%;
+    font-size: 4.5em;
+}
+
+/*==================*/
+.CONTENTFRAME {
+    width: 100%;
+    height: 50%;
+    background-color: azure;
+    margin: auto;
+    margin-top: 2em;
+}
+/*CSS for registration logic*/
+.CONTENT_REGISTRATION {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-color: floralwhite;
+}
+/*CSS for log-in logic*/
+.CONTENT_LOGIN {
+    width: 50%;
+    height: 100%;
+    float: left;
+    background-color: whitesmoke;
+}
