@@ -3,7 +3,7 @@ Create a class contains new registrated user information
 */
 export class UserInfo {
 
-	public account: string
+	public name: string
 	public display: string
 	public email: string
 	public phone: string

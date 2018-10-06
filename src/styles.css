@@ -1,1 +1,94 @@
 /* You can add global styles to this file, and also import other style files */
+html, body {
+    height: 100%;
+    background-image: url("./assets/img/rice_lovett_hall.jpg");
+    /*Set image cover and no-repeat*/
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.app_headline {
+    width: 100%;
+    height: 5%;
+    /*Rice blue: #0B51B0*/
+    background-color: #0B51B0;
+}
+
+.app_navi {
+    width: 80%;
+    margin: auto;
+    height: 100%;
+}
+
+.web_name {
+    width: auto;
+    height: 100%;
+    float: left;
+}
+
+.web_name span {
+    font-size: 30px;
+    font-weight: bold;
+    color: #E7E7E7;
+}
+
+.web_logo {
+    width: auto;
+    height: 100%;
+    float: left;
+}
+
+.web_logo img {
+    width: auto;
+    height: 80%;
+    margin-left: 50%;
+    margin-top: 10%;
+}
+
+.search_bar {
+    width: 30%;
+    height: 80%;
+    float: left;
+    margin-left: 2%;
+    margin-top: 0.3%;
+}
+
+.search_bar textarea {
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+    text-indent: 10px;
+    border-bottom-left-radius: 3px;
+    border-top-left-radius: 3px;
+    resize: none;
+}
+
+.search_btn {
+    width: auto;
+    height: 80%;
+    float: left;
+    margin-top: 0.3%;
+}
+
+.search_btn button {
+    height: 100%;
+    border-radius: 0;
+    border-bottom-right-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
+.user_profile {
+    float: right;
+    margin-top: 1%;
+    color: white;
+    font-size: 15px;
+}
+
+.user_logout {
+    float: right;
+    margin-top: 1%;
+    color: white;
+    font-size: 15px;
+    margin-right: 2em;
+}

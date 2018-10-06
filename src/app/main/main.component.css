@@ -1,5 +1,47 @@
 .main_mainframe {
+    width: 100%;
+    height: 100%;
+}
+
+/*Main Page Headline Module*/
+.main_headline {
+    width: 80%;
+    font-family: monospace;
+    height: 35%;
+    margin: auto;
+}
+
+.postpart {
     width: 80%;
     height: auto;
-    background-color: antiquewhite;
+    font-family: monospace;
+    margin: auto;
+}
+
+/*Main Page Following Module*/
+.main_following_module {
+    font-family: monospace;
+    width: 17%;
+    height: 100%;
+    height: auto;
+    float: right;
+    background-color: #E7E7E7;
+    border-top-left-radius: 2%;
+    border-top-right-radius: 2%;
+}
+
+/*Main Page Posts Module*/
+.main_posts_module {
+    font-family: monospace;
+    width: 82%;
+    height: auto;
+    float: left;
+}
+
+.user_profile:hover {
+    cursor: pointer;
+}
+
+.user_logout:hover {
+    cursor: pointer;
 }

@@ -1,3 +1,37 @@
-<p>
-  following works!
-</p>
+<div>
+  <!--Use *ngFor to fetch following data from followings array-->
+  <div *ngFor="let following of followings" class="following_user_info">
+
+    <div class="following_user_detail">
+      <div class="following_img_username">
+        <img class="following_img" src={{following.img}}>
+          
+        <div class="following_username">
+          {{following.username}}
+        </div>   
+        <!--When click remove icon, remove the user-->
+        <img class="unfollow" src="../../../assets/img/unfollow.png" (click)="deleteFollowing(following.id)">
+
+      </div>
+        
+      <div class="following_status">
+        {{following.status}}
+      </div>
+
+    </div>
+    
+  </div>
+
+  <div class="following_add_new_user">
+
+    <div name="following_add_field" id="following_add_field">
+      <input type="text" [(ngModel)]="newFollowing" *ngIf="newFollowing!=null">
+    </div>
+
+    <div name="following_add_button" id="following_add_button">
+      <button class="btn btn-primary btn-sm" (click)="addFollowing(newFollowing)">ADD</button>
+    </div>
+
+  </div>
+
+</div>

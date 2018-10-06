@@ -1,3 +1,73 @@
-<p>
-  headline works!
-</p>
+<div class="headline_mainframe">
+  <!--Div for user to add new post with picture-->
+  <div class="headline_user_new_post">
+    <!--Field for user to add new img-->
+    <div class="headline_user_add_new_img">
+      <img alt="temporary img" id="add_img" src="../../../assets/img/add.png">
+      <input type="file">
+    </div>
+
+    <!--Field for user to write new post-->
+    <div class="headline_user_add_new_post">
+      <!--Use ngModel two way bind to clear out the value-->
+      <textarea placeholder="Share your post" [(ngModel)]="clearValue"></textarea>
+
+      <div class="headline_user_add_new_post_btns">
+
+        <div class="headline_btn_share">
+          <button class="btn btn-primary" (click)="addPost()">Share</button>
+        </div>
+
+        <div class="headline_btn_clear">
+          <button class="btn btn-primary" (click)="clearOnClick()">Clear</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="headline_user_info" *ngFor="let currentUser of user">
+      <div class="headline_user_img">
+        <img src={{currentUser.img}}>
+      </div>
+
+      <div class="headline_user_status" *ngIf="showStatus" (click)="clickUserStatus()">
+        <!-- In order to change the status, user hard code instead
+          <span>{{currentUser.status}}</span>
+        -->
+        <span>{{userStatus}}</span>
+      </div>
+      <!--hide or show update textare based on the status-->
+      <div class="headline_user_status_update" *ngIf="showStatusUpdate">
+        <!--<textarea>{{currentUser.status}}</textarea>-->
+          <textarea [(ngModel)]="userStatus"></textarea>
+          <button class="btn btn-primary btn-sm" (click)="clickUpdateStatus()">Save</button>
+      </div>
+
+      <!--User follow follower posts information-->
+      <div class="headline_user_feed_information">
+
+        <div class="headline_user_follower_control" id="user_follow">
+
+          <div class="headline_user_follower_number">{{currentUser.follow}}</div>
+          <div class="headline_user_follower_title">Following</div>
+
+        </div>
+
+        <div class="headline_user_follower_control" id="user_follower">
+
+          <div class="headline_user_follower_number">{{currentUser.follower}}</div>
+          <div class="headline_user_follower_title">Followers</div>
+
+        </div>
+
+        <div class="headline_user_follower_control" id="user_posts">
+
+          <div class="headline_user_follower_number">{{currentUser.posts}}</div>
+          <div class="headline_user_follower_title"><span>Posts</span></div>
+
+        </div>
+
+      </div>
+
+  </div>
+</div>

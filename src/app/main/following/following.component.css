@@ -1,0 +1,88 @@
+/*Followings User Information*/
+.following_user_info {
+    width: 95%;
+    height: auto;
+    margin: auto;
+    border-bottom: 1px solid #BABABA;
+}
+
+.following_user_detail {
+    width: 100%;
+    padding-top: 1%;
+    height: 100%;
+}
+
+.following_img_username {
+    width: 100%;
+    overflow: hidden;
+}
+
+/*Following img*/
+.following_img {
+    width: 20%;
+    float: left;
+    border: 1px solid #BABABA;
+    box-shadow: 1px 1px 10px #0DCE00;
+}
+
+/*Following Username*/
+.following_username {
+    width: auto;
+    height: 50%;
+    float: left;
+    padding-left: 5%;
+    padding-top: 3%;
+    font-size: 15px;
+}
+
+.unfollow {
+    width: 15px;
+    float: right;
+}
+
+.unfollow:hover {
+    cursor: pointer;
+}
+
+
+/*Following Status*/
+.following_status {
+    width: 100%;
+    height: auto;
+    padding-top: 5%;
+    padding-bottom: 5%;
+    font-size: 15px;
+}
+
+/*Following Module Add Field*/
+.following_add_new_user {
+    width: 90%;
+    height: 3em;
+    margin: auto;
+    margin-top: 1em;
+}
+
+#following_add_field {
+    width: 60%;
+    height: 80%;
+    float: left;
+}
+
+#following_add_field input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    font-size: 1.3em;
+    text-indent: 0.5em;
+    border-bottom: 1px solid #BABABA;
+}
+
+#following_add_button {
+    width: 33%;
+    float: left;
+    margin-left: 3%;
+}
+
+#following_add_button button {
+    width: 100%;
+}

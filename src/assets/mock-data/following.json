@@ -1,0 +1,8 @@
+[
+    {"id": 1, "username": "MusicCzar", "status": "Always do what you're afraid to do.", "img": "../../assets/img/user_panda.png"},
+    {"id": 2, "username": "Ecophobia", "status": "All hope abandon, ye who enter here.", "img": "../../assets/img/user2.png"},
+    {"id": 3, "username": "ProZack1986", "status": "the road is life.", "img": "../../assets/img/user3.png"},
+    {"id": 4, "username": "DeluxeVegan", "status": "We shall overcome.", "img": "../../assets/img/user4.png"},
+    {"id": 5, "username": "Cookie_Monster", "status": "Draco Dormiens Nunquam Titillandus.", "img": "../../assets/img/user5.png"},
+    {"id": 6, "username": "Tony_Stark", "status": "I am IRON MAN.", "img": "../../assets/img/user6.png"}
+]

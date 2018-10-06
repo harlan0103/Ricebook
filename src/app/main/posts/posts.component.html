@@ -1,3 +1,36 @@
-<p>
-  posts works!
-</p>
+<div class="main_posts_post">
+
+  <!--Iterate the data from posts.json-->
+  <div class="posts_post_module" *ngFor="let post of posts">
+
+      <div class="posts_post">
+
+        <div class="posts_post_title_time">
+          <h3>{{post.title}}</h3>
+          <span>{{post.time}}</span>
+        </div>
+
+        <div class="posts_post_img_article">
+
+          <div class="posts_post_img">
+            <img src={{post.img}}>
+          </div>
+          <div class="posts_post_article">
+            <span>{{post.article}}</span>
+          </div>
+          
+        </div>
+        
+      </div>
+
+      <div class="posts_btns">
+        <button class="btn btn-primary">Edit</button>
+        <button class="btn btn-primary">Comment</button>
+      </div>  
+  </div>
+
+  
+</div>
+
+
+

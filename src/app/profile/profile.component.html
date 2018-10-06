@@ -1,0 +1,110 @@
+
+  <!--Navigation Bar-->
+  <div class="app_headline">
+      <div class="app_navi">
+        <div class="web_name">
+          <span>RiceBook</span>
+        </div>
+  
+        <div class="web_logo">
+          <img src="./assets/img/logo.png">
+        </div>
+  
+        <div class="search_bar">
+          <textarea placeholder="Harlan0103"></textarea>
+        </div>
+  
+        <div class="search_btn">
+          <button class="btn btn-default">Search</button>
+        </div>
+  
+      <div class="user_profile" routerLink="/main">
+        <span>Main</span>
+      </div>
+  
+      <div class="user_logout" routerLink="/">
+        <span>Logout</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="profile_main_frame">
+  <div class="profile_user_info">
+
+    <div class="profile_img">
+      <img src="../../assets/img/userimg.jpg">
+      <input type="file" *ngIf="editable">
+    </div>
+
+    <form class="profile_update_form" #updateForm="ngForm">
+      <div class="form-group">
+        <label>Username</label>
+          <input type="text" class="form-control" id="account" name="account" disabled placeholder="{{profile.username}}">
+          <div></div>
+        </div>
+      
+        <div class="form-group">
+          <label>Dispaly name</label>
+          <input type="text" class="form-control" id="display" name="display" value="{{profile.display}}" [(ngModel)]="profile.display" *ngIf="editable">
+          <input type="text" class="form-control" id="display" name="display" value="{{profile.display}}" disabled *ngIf="diseditable">
+          <div></div>
+        </div>
+      
+        <!--Email Address Editable-->
+        <div class="form-group" *ngIf="editable">
+            <label>Email</label>
+            <input type="text" #email="ngModel"
+                class="form-control" [class.is-invalid]="email.invalid && email.touched"
+                id="email" name="email" placeholder="username@ricebook.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required 
+                [(ngModel)]="profile.email">
+            <!--Error message--> 
+            <div *ngIf="email.errors && (email.invalid || email.touched)" [class.d-none]="email.vliad || email.untouched">
+                <small class="text-danger" *ngIf="email.errors.required">Email address is required</small>
+                <small class="text-danger" *ngIf="email.errors.pattern">Please enter a valid email address</small>
+            </div>
+        </div>
+
+        <!--Email Address Diseditable-->
+        <div class="form-group" *ngIf="diseditable">
+          <label>Email</label>
+          <input type="email" class="form-control" id="email" name="email" required value="{{profile.email}}" disabled>
+        </div>
+      
+        <!--Date of Birth-->
+        <div class="form-group">
+          <label>Date of Birth</label>
+          <input type="text" class="form-control" id="dob" name="dob" disabled placeholder="{{profile.dob}}">
+        </div>
+      
+        <!--Zipcode Diseditable-->
+        <div class="form-group" *ngIf="diseditable">
+          <label>Zipcode</label>
+          <input type="text" class="form-control" id="zipcode" name="zipcode" required value="{{profile.zipcode}}" disabled >
+        </div>
+
+        <!--ZIPCODE-->
+        <div class="form-group" *ngIf="editable">
+            <label>Zipcode</label>
+            <input type="text" #zipcode="ngModel"
+                class="form-control" [class.is-invalid]="zipcode.invalid && zipcode.touched"
+                id="zipcode" name="zipcode" placeholder="77030" pattern="\d{5}" required 
+                [(ngModel)]="profile.zipcode">
+              <!--The pattenr of zipcode should be 5 digit numbers-->
+            <!--Error message for invalid and mispattern-->
+            <div *ngIf="zipcode.errors && (zipcode.invalid || zipcode.touched)" [class.d-none]="zipcode.valid || zipcode.untouched">
+                <small class="text-danger" *ngIf="zipcode.errors.required">Zipcode is required</small>
+                <small class="text-danger" *ngIf="zipcode.errors.pattern">Zipcode must be 5 digit numbers</small>
+            </div>
+        </div>
+
+        <!--Update button-->
+        <div class="update_btn">
+            <button class="btn btn-primary" (click)="updateOnClick()" *ngIf="editable" [disabled]="updateForm.form.invalid">Update</button>
+            <button class="btn btn-primary" (click)="editOnClick()" *ngIf="diseditable">Edit</button>
+        </div>
+
+    </form>
+
+  </div>
+  
+</div>

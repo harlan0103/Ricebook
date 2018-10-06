@@ -1,9 +1,9 @@
 <div id="login-form">
+
   <!--ngForm contains the validation for entire form-->
   <form #loginForm="ngForm">
-    {{ loginForm.form.valid }}
     <!--USERNAME-->
-    <div class="form-group">
+    <div class="form-group" id="login_username">
       <label>USERNAME</label><br/>
       <input type="text" #username="ngModel"
       class="form-control" [class.is-invalid]="username.invalid && username.touched"
@@ -16,7 +16,7 @@
     </div>
 
     <!--PASSWORD-->
-    <div class="form-group">
+    <div class="form-group" id="login_password">
       <label>PASSWORD</label><br/>
       <input type="password" #pwd="ngModel"
       class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched"
@@ -29,6 +29,9 @@
     </div>
 
     <!--LOGIN BUTTON-->
-    <button [disabled]="loginForm.form.invalid" class="btn btn-primary">LOG IN</button>
+    <div id="login_btn">
+      <button [disabled]="loginForm.form.invalid" class="btn btn-primary" (click)="router.navigate(['/main']);" routerLink="/main">LOG IN</button>
+    </div>
+    
   </form>
 </div>

@@ -1,0 +1,172 @@
+.headline_mainframe {
+    width: 100%;
+    height: 100%;
+}
+
+.headline_user_new_post {
+    width: 82%;
+    height: 95%;
+    float: left;
+    padding-top: 2%;
+    border-bottom-left-radius: 1%;
+    border-bottom-right-radius: 1%;
+    background-color: #F7F7F7;
+}
+
+.headline_user_add_new_img {
+    width: 15%;
+    height: auto;
+    float: left;
+    margin-left: 10%;
+    margin-top: 1%;
+}
+
+#add_img {
+    width: 100%;
+    height: auto;
+    border: 2px solid #BABABA;
+}
+
+.headline_user_add_new_post {
+    height: 100%;
+    width: 70%;
+    float: left;
+    margin-left: 3%;
+}
+
+.headline_user_add_new_post textarea {
+    resize: none;
+    height: 73%;
+    width: 90%;
+    font-size: 1.5em;
+}
+
+.headline_user_add_new_post_btns {
+    height: 15%;
+    width: 90%;
+}
+
+.headline_btn_share {
+    width: 20%;
+    float: right;
+}
+
+.headline_btn_share button {
+    width: 100%;
+}
+
+.headline_btn_clear {
+    width: 25%;
+    padding-right: 5%;
+    float: right;
+}
+
+.headline_btn_clear button {
+    width: 100%;
+}
+
+/*Headline User Information(Right Conrner)*/
+.headline_user_info {
+    width: 17%;
+    height: 95%;
+    float: right;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    background-color: #F7F7F7;
+}
+
+/*Set user img*/
+.headline_user_img {
+    width: 40%;
+    height: auto;
+    margin: auto;
+    border-radius: 50%;
+    margin-top: 10%;
+    border: 4px solid #BABABA;
+}
+
+.headline_user_img img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+}
+
+/*User status*/
+.headline_user_status {
+    width: 90%;
+    height: 20%;
+    margin: auto;
+    margin-top: 5%;
+    font-size: 100%;
+    text-align: center;
+}
+
+/*User status update field*/
+.headline_user_status_update {
+    width: 100%;
+    height: 20%;
+    margin: auto;
+    margin-top: 5%;
+    font-size: 100%;
+    text-align: center;
+}
+
+.headline_user_status_update textarea {
+    width: 75%;
+    height: 90%;
+    margin-left: 2%;
+    resize: none;
+    float: left;
+}
+
+.headline_user_status_update button {
+    width: 20%;
+    height: 50%;
+    font-size: 80%;
+    margin-right: 2%;
+    margin-top: 7%;
+    float: right;
+}
+
+.headline_user_status span {
+    align-content: center;
+}
+
+.headline_user_status span:hover {
+    cursor: pointer;   /*Change cursor to pointer when hover the mouse*/
+}
+
+/*User follower follows posts*/
+.headline_user_feed_information {
+    width: 100%;
+    height: 20%;
+    margin-top: 3%;
+}
+
+.headline_user_follower_control {
+    width: 33%;
+    height: 100%;
+    float: left;
+}
+
+#user_follower {
+    border-left: 1px solid #BABABA;
+    border-right: 1px solid #BABABA;
+}
+
+/*Numbers*/
+.headline_user_follower_number {
+    width: 100%;
+    height: auto;
+    font-size: 150%;
+    font-weight: bold;
+    text-align: center;
+}
+
+/*Follower following posts data*/
+.headline_user_follower_title {
+    width: 100%;
+    height: auto;
+    font-size: 110%;
+    text-align: center;
+}

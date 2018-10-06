@@ -1,16 +1,8 @@
 <div class="REGISTRATION_TITLE">
     <form #registForm="ngForm"> <!--We have the reference of ngForm by assign the variable name #registForm-->
-        {{ registForm.form.valid }}
-        <!--pass the registForm value into json pip-->
-
-        <!--
-        {{ registForm.value | json}}
-        <hr />
-        {{ userModel | json}}
-        -->
 
         <!--ACCOUNT NAME-->
-        <div class="form-group">
+        <div class="form-group" id="regist_account_name">
             <!--This is the part for user account name-->
             <label>ACCOUNT NAME *</label><br/>
             <!--[(ngModel)] is two way binding-->
@@ -66,7 +58,7 @@
 
         <!--DATE OF BIRTH-->
         <div class="form-group">
-            <label>DATE OF BIRTH</label><br/>
+            <label>DATE OF BIRTH *</label><br/>
             <input type="date" #date="ngModel"
                 class="form-control" id="birth" name="birth" required [(ngModel)]="userModel.birth">
         </div>
@@ -88,7 +80,7 @@
 
         <!--PASSWORD-->
         <div class="form-group">
-            <label>PASSWORD</label><br/>
+            <label>PASSWORD *</label><br/>
             <input type="password" #pwd="ngModel"
                 class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched"
                 id="pwd" name="pwd" required 
@@ -107,7 +99,7 @@
         -->
         <!--CONFIRM PASSWORD-->
         <div class="form-group">
-            <label>CONFIRM PASSWORD</label><br/>
+            <label>CONFIRM PASSWORD *</label><br/>
             <input type="password" #repwd="ngModel"
                 class="form-control" [class.is-invalid]="repwd.invalid && repwd.touched" pwdValidator="pwd"
                 id="repwd" name="repwd" required 
@@ -121,11 +113,11 @@
         <div id="registration_btns">
             <!--REGISTRATION BUTTON-->
             <div id="registration_btn">
-                <button [disabled]="registForm.form.invalid" class="btn btn-primary">REGISTRATION</button>
+                <button [disabled]="registForm.form.invalid" class="btn btn-primary" routerLink="/main">REGISTER</button>
             </div>
             <!--CLEAR BUTTON-->
             <div id="clear_btn">
-                <button class="btn btn-primary">CLEAR</button>
+                <button class="btn btn-primary" (click)="registerClear()">CLEAR</button>
             </div>
         </div>
     </form>

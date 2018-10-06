@@ -12,6 +12,22 @@ import { RegistrationComponent } from './auth/registration/registration.componen
 import { FollowingComponent } from './main/following/following.component';
 import { HeadlineComponent } from './main/headline/headline.component';
 import { PostsComponent } from './main/posts/posts.component';
+// Register for FollowingService
+import { HttpClientModule } from '@angular/common/http';
+// Service providers
+import { FollowingService } from './main/following/following.service';
+import { HeadlineService } from './main/headline/headline.service';
+import { PostsService } from './main/posts/posts.service';
+import { ProfileComponent } from './profile/profile.component';
+import { Routes, RouterModule, Router} from '@angular/router';
+
+/*Create route*/
+export const route: Routes = [
+  {path: '', component: AuthComponent},
+  {path: 'auth', component: AuthComponent},
+  {path: 'main', component: MainComponent},
+  {path: 'profile', component: ProfileComponent}
+];
 
 @NgModule({
   declarations: [
@@ -23,14 +39,23 @@ import { PostsComponent } from './main/posts/posts.component';
     userPasswordConfirm,
     FollowingComponent,
     HeadlineComponent,
-    PostsComponent
+    PostsComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
-    //imports formsmodule
-    FormsModule
+    // Imports formsmodule
+    FormsModule,
+    // Import HttpClientModule
+    HttpClientModule,
+    // Router
+    RouterModule.forRoot(route)
   ],
-  providers: [],
+  exports: [
+    RouterModule,
+  ],
+  // import service into app.module
+  providers: [FollowingService, HeadlineService, PostsService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

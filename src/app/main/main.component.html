@@ -1,7 +1,40 @@
-<p>
-  main works!
-</p>
-
 <div class="main_mainframe">
-  
+
+  <div class="app_headline">
+    <div class="app_navi">
+      <div class="web_name">
+        <span>RiceBook</span>
+      </div>
+    
+      <div class="web_logo">
+        <img src="./assets/img/logo.png">
+      </div>
+    
+      <div class="search_bar">
+        <textarea placeholder="Search"></textarea>
+      </div>
+    
+      <div class="search_btn">
+        <button class="btn btn-default">Search</button>
+      </div>
+    
+      <div class="user_profile">
+        <span routerLink="/profile">Profile</span>
+      </div>
+    
+      <div class="user_logout">
+        <span routerLink="/">Logout</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="main_headline">
+    <app-headline></app-headline>
+  </div>
+ 
+
+  <div class="postpart">
+    <app-posts class="main_posts_module"></app-posts>
+    <app-following class="main_following_module"></app-following>
+  </div> 
 </div>

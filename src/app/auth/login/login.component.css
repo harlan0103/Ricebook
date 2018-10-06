@@ -1,0 +1,41 @@
+#login_username {
+    width: 50%;
+    height: auto;
+    margin: auto;
+    margin-top: 20%;
+}
+
+#login_username label {
+    font-size: 1.6em;
+}
+
+#login_username .text-danger {
+    font-size: 1.2em;
+}
+
+#login_password {
+    width: 50%;
+    height: auto;
+    margin: auto;
+}
+
+#login_password label {
+    font-size: 1.6em;
+}
+
+#login_password .text-danger {
+    font-size: 1.2em;
+}
+
+#login_btn {
+    width: 40%;
+    height: auto;
+    margin: auto;
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+
+#login_btn button {
+    width: 100%;
+    margin: auto;
+}
