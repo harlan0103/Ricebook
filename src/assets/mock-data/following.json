@@ -1,8 +1,83 @@
 [
-    {"id": 1, "username": "MusicCzar", "status": "Always do what you're afraid to do.", "img": "../../assets/img/user_panda.png"},
-    {"id": 2, "username": "Ecophobia", "status": "All hope abandon, ye who enter here.", "img": "../../assets/img/user2.png"},
-    {"id": 3, "username": "ProZack1986", "status": "the road is life.", "img": "../../assets/img/user3.png"},
-    {"id": 4, "username": "DeluxeVegan", "status": "We shall overcome.", "img": "../../assets/img/user4.png"},
-    {"id": 5, "username": "Cookie_Monster", "status": "Draco Dormiens Nunquam Titillandus.", "img": "../../assets/img/user5.png"},
-    {"id": 6, "username": "Tony_Stark", "status": "I am IRON MAN.", "img": "../../assets/img/user6.png"}
+    {"netID": "hl74", "username": "harlan0103", "status": "With greater power comes great resposibility", "img": "../../assets/img/userimg.jpg",
+        "following": [
+            {"netID": "ts1"},
+            {"netID": "ts2"},
+            {"netID": "ts3"}
+        ],
+
+        "follower": [
+        ]
+    },
+
+    {"netID": "ts1", "username": "MusicCzar", "status": "Always do what you're afraid to do.", "img": "../../assets/img/user_panda.png",
+        "following": [
+            {"netID": "ts2"},
+            {"netID": "ts3"},
+            {"netID": "ts4"}
+        ],
+
+        "follower": [
+        ]
+    },
+
+    {"netID": "ts2", "username": "Ecophobia", "status": "All hope abandon, ye who enter here.", "img": "../../assets/img/user2.png",
+        "following": [
+            {"netID": "ts3"},
+            {"netID": "ts4"}
+        ],
+
+        "follower": [
+        ]
+    },
+
+    {"netID": "ts3", "username": "ProZack1986", "status": "the road is life.", "img": "../../assets/img/user3.png",
+        "following": [
+            {"netID": "hl74"},
+            {"netID": "ts1"},
+            {"netID": "ts2"},
+            {"netID": "ts4"}
+        ],
+
+        "follower": [
+        ]
+    },
+
+    {"netID": "ts4", "username": "DeluxeVegan", "status": "We shall overcome.", "img": "../../assets/img/user4.png",
+        "following": [
+            {"netID": "hl74"},
+            {"netID": "ts1"},
+            {"netID": "ts2"},
+            {"netID": "ts4"}
+        ],
+
+        "follower": [
+        ]
+    },
+
+    {"netID": "ts5", "username": "Cookie_Monster", "status": "Draco Dormiens Nunquam Titillandus.", "img": "../../assets/img/user5.png",
+        "following": [
+            {"netID": "ts2"},
+            {"netID": "ts3"},
+            {"netID": "ts4"},
+            {"netID": "hl74"}
+        ],
+
+        "follower": [
+        ]
+    },
+
+    {"netID": "ts6", "username": "Tony_Stark", "status": "I am IRON MAN.", "img": "../../assets/img/user6.png",
+        "following": [
+            {"netID": "ts2"},
+            {"netID": "ts3"},
+            {"netID": "ts4"},
+            {"netID": "hl74"}
+        ],
+
+        "follower": [
+        ]
+    }
+
 ]
+

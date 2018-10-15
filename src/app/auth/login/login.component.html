@@ -1,12 +1,19 @@
 <div id="login-form">
 
   <!--ngForm contains the validation for entire form-->
-  <form #loginForm="ngForm">
+  <form #loginForm="ngForm" id="user_login_form">
+
+    <!--ALERT-->
+    <!--Alert user if user enter a invalid username or wrong password-->
+    <div class="alert alert-danger" role="alert" id="user_login_invalid" *ngIf="showInvalidMsg">
+      <b>Warning!</b> Incorrect username or password
+    </div>
+
     <!--USERNAME-->
     <div class="form-group" id="login_username">
       <label>USERNAME</label><br/>
       <input type="text" #username="ngModel"
-      class="form-control" [class.is-invalid]="username.invalid && username.touched"
+      class="form-control" [class.is-invalid]="username.invalid && username.touched || showInvalidMsg"
       id="login-username" name="login-username" required
       [(ngModel)]="loginModel.username">
       <!--Error message for invalid username input-->
@@ -19,7 +26,7 @@
     <div class="form-group" id="login_password">
       <label>PASSWORD</label><br/>
       <input type="password" #pwd="ngModel"
-      class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched"
+      class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched || showInvalidMsg"
       id="login-pwd" name="login-pwd" required
       [(ngModel)]="loginModel.pwd">
       <!--Error message for invalid password input-->
@@ -30,7 +37,7 @@
 
     <!--LOGIN BUTTON-->
     <div id="login_btn">
-      <button [disabled]="loginForm.form.invalid" class="btn btn-primary" (click)="router.navigate(['/main']);" routerLink="/main">LOG IN</button>
+      <button [disabled]="loginForm.form.invalid" class="btn btn-primary" (click)="checkUserValide()">LOG IN</button>
     </div>
     
   </form>

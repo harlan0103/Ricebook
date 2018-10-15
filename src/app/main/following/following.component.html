@@ -1,6 +1,6 @@
 <div>
   <!--Use *ngFor to fetch following data from followings array-->
-  <div *ngFor="let following of followings" class="following_user_info">
+  <div *ngFor="let following of followingList" class="following_user_info">
 
     <div class="following_user_detail">
       <div class="following_img_username">
@@ -10,7 +10,7 @@
           {{following.username}}
         </div>   
         <!--When click remove icon, remove the user-->
-        <img class="unfollow" src="../../../assets/img/unfollow.png" (click)="deleteFollowing(following.id)">
+        <img class="unfollow" src="../../../assets/img/unfollow.png" (click)="deleteFollowing(following.username)">
 
       </div>
         

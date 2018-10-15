@@ -1,30 +1,38 @@
+
+/*The login form*/
+#user_login_form {
+    margin-top: 20%;
+}
+
+/*Field for username input*/
 #login_username {
     width: 50%;
     height: auto;
     margin: auto;
-    margin-top: 20%;
+    margin-top: 1%;
 }
 
 #login_username label {
-    font-size: 1.6em;
+    font-size: 160%;
 }
 
 #login_username .text-danger {
-    font-size: 1.2em;
+    font-size: 120%;
 }
 
 #login_password {
     width: 50%;
     height: auto;
     margin: auto;
+    margin-top: 2%;
 }
 
 #login_password label {
-    font-size: 1.6em;
+    font-size: 160%;
 }
 
 #login_password .text-danger {
-    font-size: 1.2em;
+    font-size: 120%;
 }
 
 #login_btn {
@@ -38,4 +46,14 @@
 #login_btn button {
     width: 100%;
     margin: auto;
+    font-size: 150%;
+    background-color: #0B51B0;
 }
+
+/*Invalid user name or password alert*/
+#user_login_invalid {
+    width: 50%;
+    margin: auto;
+}
+
+

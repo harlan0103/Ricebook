@@ -25,7 +25,7 @@
     </div>
   </div>
 
-  <div class="headline_user_info" *ngFor="let currentUser of user">
+  <div class="headline_user_info">
       <div class="headline_user_img">
         <img src={{currentUser.img}}>
       </div>
@@ -48,7 +48,7 @@
 
         <div class="headline_user_follower_control" id="user_follow">
 
-          <div class="headline_user_follower_number">{{currentUser.follow}}</div>
+          <div class="headline_user_follower_number">{{currentUser.following}}</div>
           <div class="headline_user_follower_title">Following</div>
 
         </div>

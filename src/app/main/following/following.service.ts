@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IFollowing } from '../../following';
+import { IPosts } from '../../posts';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -9,7 +10,7 @@ import { Observable } from 'rxjs';
 export class FollowingService {
   // Create a property point to the json file
   private _url: string = "../../assets/mock-data/following.json";
-
+  private _postUrl: string = "../../assets/mock-data/posts.json";
   // In order to use HTTP, create a dependence of http in constructor
   // Then we can use http as instance to refer the HttpClient
   constructor(private http: HttpClient) { 
@@ -34,5 +35,12 @@ export class FollowingService {
     return this.http.get<IFollowing[]>(this._url);
     // .get return an observable
     // Create a following interface
+  }
+
+  /**
+   * 返回post json
+   */
+  getPost(): Observable<IPosts[]>{
+    return this.http.get<IPosts[]>(this._postUrl);
   }
 }

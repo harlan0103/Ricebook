@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 
 @Component({
   selector: 'app-main',
@@ -12,4 +12,10 @@ export class MainComponent implements OnInit {
   ngOnInit() {
   }
 
+  // Using postList to connect with following.component and posts.component
+  postList = [];
+
+  postListEvent($event) {
+    this.postList = $event;
+  }
 }

@@ -29,12 +29,15 @@
   </div>
 
   <div class="main_headline">
-    <app-headline></app-headline>
+    <app-headline (addNewPost)="postListEvent($event)"></app-headline>
   </div>
  
 
   <div class="postpart">
-    <app-posts class="main_posts_module"></app-posts>
-    <app-following class="main_following_module"></app-following>
+    <div *ngFor="let post of postList">
+      <span style="color:white">{{post.title}}</span>
+    </div>
+    <app-posts class="main_posts_module" [postList]="postList"></app-posts>
+    <app-following class="main_following_module" (PostListEvent)="postListEvent($event)"></app-following>
   </div> 
 </div>

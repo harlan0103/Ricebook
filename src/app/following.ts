@@ -2,8 +2,10 @@
 Create a interface named IFollowing
 */
 export interface IFollowing {
-    id: number,
+    netID: string,
     username: string,
     status: string,
-    img: string
+    img: string,
+    following: string,
+    follower: string
 }

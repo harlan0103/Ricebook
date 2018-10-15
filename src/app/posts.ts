@@ -1,4 +1,5 @@
 export interface IPosts {
+    author: string,
     title: string,
     time: string,
     img: string,

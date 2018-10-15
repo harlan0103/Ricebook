@@ -20,6 +20,8 @@ import { HeadlineService } from './main/headline/headline.service';
 import { PostsService } from './main/posts/posts.service';
 import { ProfileComponent } from './profile/profile.component';
 import { Routes, RouterModule, Router} from '@angular/router';
+import { LoginService } from './auth/login/login.service';
+import { ProfileService } from './profile/profile.service';
 
 /*Create route*/
 export const route: Routes = [
@@ -55,7 +57,7 @@ export const route: Routes = [
     RouterModule,
   ],
   // import service into app.module
-  providers: [FollowingService, HeadlineService, PostsService],
+  providers: [FollowingService, HeadlineService, PostsService, LoginService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
