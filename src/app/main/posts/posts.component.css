@@ -11,6 +11,11 @@
     text-align: center;
 }
 
+.posts_post_title_time span {
+    margin-left: 5%;
+    font-size: 130%;
+}
+
 .posts_post_img_article {
     width: 90%;
     height: auto;

@@ -26,7 +26,7 @@ export class HeadlineComponent implements OnInit {
   // A new post
   public newPost: IPosts = {
     "img": "",
-    "time": "dummy time",
+    "time": "Oct 16, 2018",
     "author": "dummy author",
     "article": "",
     "title": "dummy title"
