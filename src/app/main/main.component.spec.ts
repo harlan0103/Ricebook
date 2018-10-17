@@ -19,7 +19,17 @@ describe('MainComponent', () => {
     fixture.detectChanges();
   });
 
+ 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  /**
+   * 
+   */
+  it('should log out a user (login state should be cleared)', () => {
+    component.logOutUser();
+    let currentUser = localStorage.getItem("currentUser");
+    expect(currentUser).toBe("");
   });
 });

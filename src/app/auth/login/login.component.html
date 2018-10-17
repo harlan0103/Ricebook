@@ -6,7 +6,7 @@
     <!--ALERT-->
     <!--Alert user if user enter a invalid username or wrong password-->
     <div class="alert alert-danger" role="alert" id="user_login_invalid" *ngIf="showInvalidMsg">
-      <b>Warning!</b> Incorrect username or password
+      {{errorMessage}}
     </div>
 
     <!--USERNAME-->

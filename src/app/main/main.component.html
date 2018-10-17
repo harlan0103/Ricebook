@@ -11,11 +11,11 @@
       </div>
     
       <div class="search_bar">
-        <textarea placeholder="Search"></textarea>
+        <textarea placeholder="Search" [(ngModel)]="search"></textarea>
       </div>
     
       <div class="search_btn">
-        <button class="btn btn-default">Search</button>
+        <button class="btn btn-default" (click)="onSearchClick()">Search</button>
       </div>
     
       <div class="user_profile">

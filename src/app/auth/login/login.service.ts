@@ -26,4 +26,43 @@ export class LoginService {
   getPosts(): Observable<IPosts[]>{
     return this.http.get<IPosts[]>(this._postsUrl);
   }
+
+    /**
+   * loginAction()
+   * @param username 
+   * @param pwd 
+   * @param profile
+   * Check if user entered username and password are match and valid 
+   */
+  loginAction(username: string, pwd: string, profile: IProfile[]) {
+    for(let i = 0; i < profile.length; i++){
+      if(username == profile[i].username && pwd == profile[i].password){
+        return true;
+      }
+      else{
+        return false;
+      }
+    }
+  }
+
+  /**
+   * showSuccessMessage()
+   * When user successLogged in
+   * Return the success message
+   */
+  ShowSuccessMessage(){
+    let message = "User login successful";
+    return message;
+  }
+
+  /**
+   * showErrorMessage()
+   * When user entered a invalid username or wrong password
+   * Show this message
+   */
+  showErrorMessage(){
+    let message = "Invalid username or wrong password!";
+    return message;
+  }
+
 }

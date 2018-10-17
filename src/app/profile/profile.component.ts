@@ -19,7 +19,7 @@ export class ProfileComponent implements OnInit {
   profile: userProfile = {
     img: "",
     username: "",
-    display: "",
+    displayname: "",
     email: "",
     dob: "",
     zipcode: ""
@@ -37,7 +37,7 @@ export class ProfileComponent implements OnInit {
     this.diseditable = false;
   }
 
-  constructor(private _profileService: LoginService) { }
+  constructor(private _profileService: LoginService, private pService: ProfileService) { }
 
   ngOnInit() {
     this._profileService.getUser().subscribe(data => {
@@ -45,9 +45,12 @@ export class ProfileComponent implements OnInit {
       console.log(this.currentUser);
       this.storageUser = localStorage.getItem("currentUser");
       console.log(this.storageUser);
-      // Get the current logged in user data
-      // 先从currentUser中找到目前存在localStorage中用户的名字
-      // 再给设置好的profile类赋值
+      this.getUserInfo();
+      // Call method in service to fetch user profile into profile object
+      this.profile = this.pService.fetchLoggedInUser(this.storageUser, this.currentUser);
+      console.log(this.profile);
+
+      /*
       for(let i = 0; i < this.currentUser.length; i++){
         if(this.currentUser[i].netID == this.storageUser){
           //this.profile.img = this.currentUser[i].img;
@@ -55,11 +58,18 @@ export class ProfileComponent implements OnInit {
           this.profile.img = this.currentUser[i].img;
           this.profile.username = this.currentUser[i].username;
           this.profile.zipcode = this.currentUser[i].zipcode;
-          this.profile.display = this.currentUser[i].displayname;
+          this.profile.displayname = this.currentUser[i].displayname;
           this.profile.email = this.currentUser[i].email;
         }
       }
+      */
     });
   }
+
+  getUserInfo(){
+    console.log("fetching user data from service");
+    
+  }
+
 
 }

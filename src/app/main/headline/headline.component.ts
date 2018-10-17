@@ -26,7 +26,7 @@ export class HeadlineComponent implements OnInit {
   // A new post
   public newPost: IPosts = {
     "img": "",
-    "time": "dummy time",
+    "time": "Oct 16, 2018",
     "author": "dummy author",
     "article": "",
     "title": "dummy title"
@@ -109,7 +109,6 @@ export class HeadlineComponent implements OnInit {
     */
   }
 
-
   ngOnInit() {
     // When page init
     // Use service object to call getUser method
@@ -121,7 +120,7 @@ export class HeadlineComponent implements OnInit {
           this.loginUser = localStorage.getItem("currentUser");
           for(let i = 0; i < this.users.length; i++){
             console.log(this.users[i].netID);
-            if(this.users[i].netID == this.loginUser){
+            if(this.users[i].username == this.loginUser){
               // We find the current user
               //this.user = this.users[i];
               this.currentUser.netID = this.loginUser;

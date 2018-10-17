@@ -38,9 +38,11 @@ export class FollowingService {
   }
 
   /**
-   * 返回post json
+   * return post json
    */
   getPost(): Observable<IPosts[]>{
     return this.http.get<IPosts[]>(this._postUrl);
   }
+
+
 }

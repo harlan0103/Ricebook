@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   public currentUserFollowingList = [];
   public postsFeed = [];
   public userPosts = [];
+  public errorMessage:string;
 
   //new login model
   loginModel = new UserLogin();
@@ -37,6 +38,8 @@ export class LoginComponent implements OnInit {
   initLocalStorage() {
     localStorage.setItem("userFollowing", "");
     localStorage.setItem("userPosts", "");
+    localStorage.setItem("currentUser", "");
+    localStorage.setItem("status", "");
   }
 
   /**
@@ -136,6 +139,7 @@ export class LoginComponent implements OnInit {
   checkUserValide() {
     this.validUser = false;
     console.log(this.loginModel.username);
+
     for(let i = 0; i < this.profile.length; i++){
       if(this.loginModel.username == this.profile[i].username && this.loginModel.pwd == this.profile[i].password){
         // If the login username and password are match and correct
@@ -143,13 +147,14 @@ export class LoginComponent implements OnInit {
         this.validUser = true;
         this.showInvalidMsg = false;
         // Set netID and status to the localStorage
-        localStorage.setItem('currentUser', this.profile[i].netID);
+        localStorage.setItem('currentUser', this.profile[i].username);
         localStorage.setItem('status', this.profile[i].status);
         this.findUserFollowing(this.loginModel.username);
         this.findUserPosts(this.loginModel.username);
       }
     }
     if(this.validUser != true){
+      this.errorMessage = this._loginService.showErrorMessage();
       console.log("invalid user"); 
       this.showInvalidMsg = true;
     }

@@ -6,7 +6,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-
+  search:string = ""
   constructor() { }
 
   ngOnInit() {
@@ -14,8 +14,50 @@ export class MainComponent implements OnInit {
 
   // Using postList to connect with following.component and posts.component
   postList = [];
+  public userPost = [];
+
+  /**
+   * onSearchClick()
+   * When user click search button
+   * Based on search bar content
+   * Show specific content on the post view
+   */
+  onSearchClick() {    
+    if(this.search == ""){
+      return // do nothing
+    }
+    else {
+      // Set the postList to null
+      this.postList = [];
+      console.log(this.search);
+      // Get the postList
+      let userPost = JSON.parse(localStorage.getItem("userPosts"));
+      console.log(userPost);
+      // Check for the author
+      for(let i = 0; i < userPost.length; i++){
+        if(userPost[i].author.toLowerCase().includes(this.search.toLowerCase()) 
+        || userPost[i].article.toLowerCase().includes(this.search.toLowerCase())){
+          this.postList.push(userPost[i]);
+        }
+      }
+    }
+  }
+
+  /**
+   * @onClearSearch
+   * When user click clear button on search bar
+   * Clear search bar content
+   * And show all posts on the post view
+   */
+  onClearSearch() {
+
+  }
 
   postListEvent($event) {
     this.postList = $event;
+  }
+
+  logOutUser() {
+    localStorage.setItem("currentUser", "");
   }
 }
