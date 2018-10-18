@@ -15,7 +15,8 @@
       </div>
     
       <div class="search_btn">
-        <button class="btn btn-default" (click)="onSearchClick()">Search</button>
+        <button class="btn btn-default" (click)="onSearchClick()" *ngIf="searchOn">Search</button>
+        <button class="btn btn-default" (click)="onClearSearch()" *ngIf="searchOff">Clear</button>
       </div>
     
       <div class="user_profile">
@@ -34,9 +35,11 @@
  
 
   <div class="postpart">
+  <!-- Test div for posts
     <div *ngFor="let post of postList">
       <span style="color:white">{{post.title}}</span>
     </div>
+  -->
     <app-posts class="main_posts_module" [postList]="postList"></app-posts>
     <app-following class="main_following_module" (PostListEvent)="postListEvent($event)"></app-following>
   </div> 

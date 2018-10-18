@@ -27,7 +27,7 @@ export class HeadlineComponent implements OnInit {
   public newPost: IPosts = {
     "img": "",
     "time": "Oct 16, 2018",
-    "author": "dummy author",
+    "author": "",
     "article": "",
     "title": "dummy title",
     "comment": ""
@@ -71,7 +71,9 @@ export class HeadlineComponent implements OnInit {
     // Create a new post object
     // Set the article
     this.newPost.article = this.clearValue;
-    this.postList.push(this.newPost);
+    this.newPost.author = localStorage.getItem("currentUser");
+    this.newPost.time = Date();
+    this.postList.unshift(this.newPost);
     localStorage.setItem("userPosts", JSON.stringify(this.postList));
     this.addNewPost.emit(this.postList);
     this.clearValue = "";

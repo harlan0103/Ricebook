@@ -86,3 +86,10 @@
 #following_add_button button {
     width: 100%;
 }
+
+#invalidUser {
+    width: 90%;
+    margin: auto;
+    padding-bottom: 1%;
+    color: red;
+}

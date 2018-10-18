@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserLogin } from '../../user_login';
 import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
   showInvalidMsg: boolean = false;
   //validPwd: boolean = false;
   private userpwd: string;
-  constructor(private _loginService: LoginService) { }
+  constructor(private _loginService: LoginService, private router:Router) { }
 
   ngOnInit() {
     this.initLocalStorage();
@@ -151,7 +152,9 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('status', this.profile[i].status);
         this.findUserFollowing(this.loginModel.username);
         this.findUserPosts(this.loginModel.username);
+        this.router.navigate(['/main']);
       }
+      
     }
     if(this.validUser != true){
       this.errorMessage = this._loginService.showErrorMessage();

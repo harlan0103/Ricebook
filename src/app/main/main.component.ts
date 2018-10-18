@@ -7,7 +7,9 @@ import { MainService } from './main.service';
   styleUrls: ['./main.component.css']
 })
 export class MainComponent implements OnInit {
-  search:string = ""
+  search:string = "";
+  searchOn:boolean = true;
+  searchOff:boolean = false;
   constructor(private _mainService: MainService) { }
 
   ngOnInit() {
@@ -28,7 +30,8 @@ export class MainComponent implements OnInit {
     // Get the postList
     let userPost = JSON.parse(localStorage.getItem("userPosts"));
     this.postList = this._mainService.searchKeyWord(this.search, userPost);
-    
+    this.searchOn = false;
+    this.searchOff = true;
     /*
     if(this.search == ""){
       return // do nothing
@@ -58,7 +61,10 @@ export class MainComponent implements OnInit {
    * And show all posts on the post view
    */
   onClearSearch() {
-
+    this.searchOn = true;
+    this.searchOff = false;
+    this.search = "";
+    this.postList = JSON.parse(localStorage.getItem("userPosts"));
   }
 
   postListEvent($event) {

@@ -1,6 +1,8 @@
 <div class="REGISTRATION_TITLE">
     <form #registForm="ngForm"> <!--We have the reference of ngForm by assign the variable name #registForm-->
-
+        <div class="alert alert-success" *ngIf="registStatus">
+            <span><b>DING!  </b>Welcome {{userModel.name}}</span>
+        </div>
         <!--ACCOUNT NAME-->
         <div class="form-group" id="regist_account_name">
             <!--This is the part for user account name-->
@@ -113,7 +115,7 @@
         <div id="registration_btns">
             <!--REGISTRATION BUTTON-->
             <div id="registration_btn">
-                <button [disabled]="registForm.form.invalid" class="btn btn-primary" routerLink="/main">REGISTER</button>
+                <button [disabled]="registForm.form.invalid" class="btn btn-primary" (click)="registSuccess()">REGISTER</button>
             </div>
             <!--CLEAR BUTTON-->
             <div id="clear_btn">

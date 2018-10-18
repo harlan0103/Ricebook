@@ -24,7 +24,7 @@ export class FollowingComponent implements OnInit {
   duplicate: boolean = false;
   newFollowing: string = "";
   newFollowingObj: IFollowing;
-
+  invalidUser:boolean = false;
   // Create a emitter to transfer value to parent component
   @Output() PostListEvent = new EventEmitter();
 
@@ -107,16 +107,18 @@ export class FollowingComponent implements OnInit {
       this.followingList.push(this.newFollowingObj);
       localStorage.setItem("userFollowing", JSON.stringify(this.followingList));
       this.addPost(newFollowing);
+      this.invalidUser = false;
     }
     else{
       // Print out error message
-      console.log("invalid or duplicate new following");
+      this.invalidUser = true;
     }
     
     // Initialize all params
     this.valid = false;
     this.duplicate = false;
     this.newFollowing = "";
+
     //location.reload();
   }
 

@@ -8,7 +8,7 @@ import { AbstractControl } from '@angular/forms';
   styleUrls: ['./registration.component.css']
 })
 export class RegistrationComponent implements OnInit {
-
+  registStatus:boolean = false;
   // Create a new userModel to recieve user input
   userModel = new UserInfo();
 
@@ -27,6 +27,10 @@ export class RegistrationComponent implements OnInit {
 
   ngOnInit() {
   
+  }
+
+  registSuccess(){
+    this.registStatus = true;
   }
   
 }
