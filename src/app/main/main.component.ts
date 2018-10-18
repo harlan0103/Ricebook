@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
+import { MainService } from './main.service';
 
 @Component({
   selector: 'app-main',
@@ -7,7 +8,7 @@ import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 })
 export class MainComponent implements OnInit {
   search:string = ""
-  constructor() { }
+  constructor(private _mainService: MainService) { }
 
   ngOnInit() {
   }
@@ -23,6 +24,12 @@ export class MainComponent implements OnInit {
    * Show specific content on the post view
    */
   onSearchClick() {    
+
+    // Get the postList
+    let userPost = JSON.parse(localStorage.getItem("userPosts"));
+    this.postList = this._mainService.searchKeyWord(this.search, userPost);
+    
+    /*
     if(this.search == ""){
       return // do nothing
     }
@@ -41,6 +48,7 @@ export class MainComponent implements OnInit {
         }
       }
     }
+    */
   }
 
   /**
@@ -57,7 +65,7 @@ export class MainComponent implements OnInit {
     this.postList = $event;
   }
 
-  logOutUser() {
-    localStorage.setItem("currentUser", "");
+  Logout() {  
+    this._mainService.logOutUser();
   }
 }

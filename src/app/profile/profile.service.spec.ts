@@ -8,10 +8,12 @@ describe('ProfileService', () => {
     imports: [HttpClientModule]
   }));
 
+  /*
   it('should be created', () => {
     const service: ProfileService = TestBed.get(ProfileService);
     expect(service).toBeTruthy();
   });
+  */
 
   /**
    * Test case: should fetch the logged in users profile information

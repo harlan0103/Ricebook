@@ -8,10 +8,12 @@ describe('LoginService', () => {
     imports: [HttpClientModule]
   }));
 
+  /*
   it('should be created', () => {
     const service: LoginService = TestBed.get(LoginService);
     expect(service).toBeTruthy();
   });
+  */
 
   const testUserProfile = [
     {"username": "harlan0103", "displayname": "harlan", "password": "12345678", "netID": "hl74", "email": "hl74@rice.edu", "zipcode": "77030", "dob": "1996-01-03", "phone": "123-123-1233", "img": "../../assets/img/userimg.jpg", "status":"With greater power comes great resposibility"},

@@ -152,11 +152,14 @@ export class FollowingComponent implements OnInit {
    */
   addPost(username) {
     this.getPostsList();
+    /*
     for(let i = 0; i < this.posts.length; i++){
       if(this.posts[i].author == username){
         this.postList.push(this.posts[i]);
       }
     }
+    */
+    this.postList = this._followingService.addPost(username, this.postList, this.posts);
     localStorage.setItem("userPosts", JSON.stringify(this.postList));
     this.PostListEvent.emit(this.postList);
   }
@@ -168,12 +171,7 @@ export class FollowingComponent implements OnInit {
    */
   deletePost(username) {
     this.getPostsList();
-    for(let i = 0; i < this.postList.length; i++){
-      if(this.postList[i].author != username){
-        // Use a new array to update value
-        this.deletePostList.push(this.postList[i]);
-      }
-    }
+    this.deletePostList = this._followingService.deletePost(username, this.postList);
     localStorage.setItem("userPosts", JSON.stringify(this.deletePostList));
     this.PostListEvent.emit(this.deletePostList);
     this.deletePostList = [];

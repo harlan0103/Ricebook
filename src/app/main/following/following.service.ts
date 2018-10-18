@@ -44,5 +44,54 @@ export class FollowingService {
     return this.http.get<IPosts[]>(this._postUrl);
   }
 
+  /**
+   * Find all posts with currentUser as author
+   */
+  getUserPosts(currentUser:string, PostList:IPosts[]){
+    let post = [];
+    for(let i = 0; i < PostList.length; i++){
+      if(PostList[i].author == currentUser){
+        post.push(PostList[i]);
+      }
+    }
+    return post;
+  }
 
+  addFollowing(username:string, followingList:IFollowing[]){
+
+  }
+
+  /**
+   * deletePost
+   * @param username 
+   * @param PostList 
+   * If post contains username
+   * Delete it from the current post list
+   */
+  deletePost(username:string, PostList: IPosts[]){
+    // Use a new array to update value
+    let deletePostList = [];
+    for(let i = 0; i < PostList.length; i++){
+      if(PostList[i].author != username){
+        deletePostList.push(PostList[i]);
+      }
+    }
+    return deletePostList;
+  }
+
+  /**
+   * addPost
+   * @param username 
+   * @param PostList 
+   * If post contains username
+   * Add it to the user following posts
+   */
+  addPost(username:string, PostList: IPosts[], posts: IPosts[]){
+    for(let i = 0; i < posts.length; i++){
+      if(posts[i].author == username){
+        PostList.push(posts[i]);
+      }
+    }
+    return PostList;
+  }
 }

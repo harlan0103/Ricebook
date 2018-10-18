@@ -26,8 +26,15 @@
 
       <div class="posts_btns">
         <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-primary">Comment</button>
-      </div>  
+        <button class="btn btn-primary" (click)="clickComment()">Comment</button>
+      </div>
+      
+      <div *ngIf="showComment">
+      <div *ngFor="let comment of post.comments" class="postComment" >
+        <span id="comment_username">{{comment.username}}:</span>
+        <span id="comment_comment">{{comment.comment}}</span>
+      </div>
+      </div>
   </div>
 
   

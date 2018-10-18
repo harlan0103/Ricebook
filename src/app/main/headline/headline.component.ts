@@ -29,7 +29,8 @@ export class HeadlineComponent implements OnInit {
     "time": "Oct 16, 2018",
     "author": "dummy author",
     "article": "",
-    "title": "dummy title"
+    "title": "dummy title",
+    "comment": ""
   };
 
   showStatusUpdate: boolean = false;

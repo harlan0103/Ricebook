@@ -8,7 +8,7 @@ import { PostsService } from '../posts/posts.service';
 })
 export class PostsComponent implements OnInit {
   @Input() public postList = [];
-
+  public showComment = false;
   public userPosts = [];
   posts: string[];
   constructor(private _postService: PostsService) { }
@@ -27,5 +27,14 @@ export class PostsComponent implements OnInit {
     console.log(this.posts);
     // When init the page, load the user posts from localStorage
     this.postList = JSON.parse(localStorage.getItem("userPosts"));
+  }
+
+  clickComment(){
+    if(this.showComment == true){
+      this.showComment = false;
+    }
+    else{
+      this.showComment = true;
+    }
   }
 }
