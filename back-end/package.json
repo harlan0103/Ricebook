@@ -11,6 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
-    "express": "^4.16.4"
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.4",
+    "md5": "^2.2.1",
+    "mongoose": "^5.3.10"
+  },
+  "devDependencies": {
+    "dot-env": "0.0.1"
   }
 }
