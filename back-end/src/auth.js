@@ -4,6 +4,17 @@ const cookieParser = require('cookie-parser')
 const User = require('./model.js').User
 const Profile = require('./model.js').Profile
 
+/////////////////////////////////////////////////
+///////// Test data for stub endpoint ///////////
+const testUser = [
+	{
+		username: "testUser1",
+		password: "pwd"
+	}
+]
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+
 // function userLogin for endpoint POST '/login'
 const sessionUser = {}
 const cookieKey = 'sid'
@@ -38,10 +49,10 @@ const userLogin = (req, res) => {
 				else{
 					// Create a session for the user
 					var sessionKey = md5(mySecretMessage + new Date().getTime() + usr)
-					//res.send({sessionKey: sessionKey})
 					sessionUser[sessionKey] = existUser[0]
+					// Session id is stored as httpOnly cookie
 					res.cookie(cookieKey, sessionKey, {maxAge: 3600*1000, httpOnly: true})
-					res.send({username: usr, status: "success", sessionKey: sessionKey})
+					res.send({username: usr, result: "success"})
 				}
 			}
 		})
@@ -127,15 +138,37 @@ const userRegist = (req, res) => {
 	}
 }
 
-// function changePwd for endpoint PUT '/password'
+///////////////////////////////////////////////
+//////////   		STUB         //////////////
+///////////////////////////////////////////////
+
+/*
+function changePwd for endpoint PUT '/password'
+STUB for '/password'
+*/
 const changePwd = (req, res) => {
-	res.send("pwd change request")
+	var currentUser = testUser[0].username
+	var newPwd = req.body.password
+	if(!newPwd){
+		res.status(500).send("No password entered")
+		return
+	}
+	var userObj = testUser.find(c => c.username === currentUser)
+	if(!userObj){
+		res.status(500).send("No such user object")
+		return
+	}
+	else{
+		userObj.password = newPwd
+		res.send({username: currentUser, password: newPwd, result: "success"})
+	}
 }
+///////////////////////////////////////////////
 
 module.exports = (app) => {
+	app.post('/register', userRegist)
 	app.post('/login', userLogin)
 	app.use(isLoggedIn)
-	app.put('/logout', isLoggedIn, userLogout)
-	app.post('/register', userRegist)
+	app.put('/logout', userLogout)
 	app.put('/password', changePwd)
 }

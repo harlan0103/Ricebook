@@ -1,5 +1,21 @@
 const Post = require('./model.js').Post
 const Comment = require('./model.js').Comment
+
+/////////////////////////////////////////////////
+///////// Test data for stub endpoint ///////////
+const testPost = [
+	{
+		id: 1,
+		author: "testUser1",
+		body: "This is the content for test post",
+		date: "2018/11/9",
+		picture: "",
+		comment: []
+	}
+]
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
+
 /*
 Function getArticles for endpoint GET '/articles.:id?'
 GET /articles Return at least 5 articles if test user is logged in user
@@ -29,14 +45,17 @@ const getArticles = (req, res) => {
 		}
 	}
 	else{
+		// With id param
 		var id = req.params.id
-		res.send(id)
+		Post.find({id: id}).exec(function(err, post){
+			if(!post || post.length == 0){
+				res.status(500).send("No articles with this Id")
+			}
+			else{
+				res.send(post)
+			}
+		})
 	}
-}
-
-// function putArticles for endpoint PUT '/articles/:id'
-const putArticles = (req, res) => {
-
 }
 
 /* 
@@ -80,6 +99,34 @@ const postNewArticle = (req, res) => {
 		}
 	}
 }
+
+///////////////////////////////////////////////
+//////////   		STUB         //////////////
+///////////////////////////////////////////////
+
+/* 
+Function putArticles for endpoint PUT '/articles/:id'
+*/
+const putArticles = (req, res) => {
+	var postId = req.params.id
+	var content = req.body.body
+	if(!postId || !content){
+		res.status(500).send("No id provided or no content")
+		return
+	}
+	else{
+		var postObj = testPost.find(c => c.id === parseInt(postId))
+		if(!postObj){
+			res.status(500).send("No post for this id")
+			return
+		}
+		else{
+			postObj.body = content
+			res.send({id: postId, body: postObj.body})
+		}
+	}
+}
+///////////////////////////////////////////////
 
 module.exports = (app) => {
 	app.get('/articles/:id?', getArticles)

@@ -2,7 +2,8 @@
 // Information except passwords which is in auth.js
 const Profile = require('./model.js').Profile
 
-// Dummy date for testing
+/////////////////////////////////////////////////
+///////// Test data for stub endpoint ///////////
 const profile = [
 	{
 		username: "harlan0103",
@@ -40,6 +41,8 @@ const profile = [
 		avater: "hard code avater for Ecophobia"
 	}
 ]
+/////////////////////////////////////////////////
+/////////////////////////////////////////////////
 
 /*
 Function getHeadlines for endpoint '/headlines/:users?'
@@ -102,24 +105,10 @@ const getEmail = (req, res) => {
 	// Get params
 	var user = req.params.user
 	if(!user){
-		req.user = "harlan0103"
+		var user = profile[0].username
 	}
-	// Use find() to find user information in the database
-	Profile.find({username: user}).exec(function(err, currentUser){
-		if(err){
-			res.status(500).send("Error")
-			return	
-		}
-		if(!currentUser){
-			res.status(400).send("No such user")
-			return
-		} 
-		res.send({username: user, email: currentUser[0].email})
-	})
-
-
-	//if(!currentUser) res.status(404).send('The user is not defined');
-	//res.send({username: user, email: currentUser.email})
+	var userObj = profile.find(c => c.username === user)
+	res.send({username: user, email: userObj.email})
 }
 
 // function putEmail for endpoint '/email'
@@ -136,8 +125,7 @@ const getDob = (req, res) => {
 	var user = req.params.user
 	if(!user){
 		// Set default user
-		//** Should be the current logged in user
-		req.user = "harlan0103"
+		var user = profile[0].username
 	}
 	// Check if entered user is exist
 	const currentUser = profile.find(c => c.username === user)
@@ -153,7 +141,7 @@ const getZipcode = (req, res) => {
 	if(!user){
 		// Set default user
 		//** Should be the current logged in user
-		req.user = "harlan0103"
+		req.user = profile[0].username
 	}
 	// Check if entered user is exist
 	const currentUser = profile.find(c => c.username === user)
@@ -194,6 +182,7 @@ const putAvatar = (req, res) => {
 	if(!avatar) res.status(400).send("Not provide avatar");
 	res.send({username: "dummy", avatar: avatar})
 }
+///////////////////////////////////////////////
 
 module.exports = (app) => {
 	//app.get('/headline/:user', getHeadline)
