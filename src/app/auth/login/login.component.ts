@@ -164,4 +164,29 @@ export class LoginComponent implements OnInit {
     // succesful login
   }
 
+  /////////////////////////////////////////////////////////////
+  // Front-end connected with Back-end
+  /////////////////////////////////////////////////////////////
+  newLoginLogic(){
+    this._loginService.userLogin(this.loginModel).subscribe(res => {
+      console.log(res);
+      if(res.result == "INVALID"){
+        console.log("No User");
+        this.errorMessage = this._loginService.showErrorMessage();
+        this.showInvalidMsg = true;
+      }
+      else if(res.result == "WRONGPASSWORD"){
+        console.log("Wrong password");
+        this.errorMessage = this._loginService.showErrorMessage();
+        this.showInvalidMsg = true;
+      }
+      else if(res.result == "success"){
+        console.log("Valid");
+        this.showInvalidMsg = false;
+        // Login successfuly store user information into local storage
+        localStorage.setItem("currentUser", this.loginModel.username);
+        this.router.navigate(['/main']);
+      }
+    })
+  }
 }

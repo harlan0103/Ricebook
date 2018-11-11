@@ -14,6 +14,7 @@ export class PostsComponent implements OnInit {
   constructor(private _postService: PostsService) { }
   
   ngOnInit() {
+    this.frontend_getPost();
     //this.getPostsList();
     //this._postService.getPost().subscribe(data => this.posts = data);
     /*
@@ -23,10 +24,18 @@ export class PostsComponent implements OnInit {
       console.log(data);
     });
     */
-    this._postService.getPost().subscribe(response => {this.posts = response["posts"]});
-    console.log(this.posts);
+    //this._postService.getPost().subscribe(response => {this.posts = response["posts"]});
+    //console.log(this.posts);
     // When init the page, load the user posts from localStorage
-    this.postList = JSON.parse(localStorage.getItem("userPosts"));
+    //this.postList = JSON.parse(localStorage.getItem("userPosts"));
+  }
+
+  frontend_getPost(){
+    this._postService.backend_getPost().subscribe(r => {
+      var response = r;
+      this.postList = response.posts;
+      console.log(this.postList);
+    });
   }
 
   clickComment(){

@@ -31,11 +31,23 @@ export class FollowingComponent implements OnInit {
   constructor(private _followingService: FollowingService) { }
 
   ngOnInit() {// Get called when component initialized
-    this.getFollowing();
-    this.getFollowingList();
-    this.getPosts();
-    this.getPostsList();
+    //this.getFollowing();
+    //this.getFollowingList();
+    //this.getPosts();
+    //this.getPostsList();
+
   }
+
+  //////////////////////////////////////////////////////////////////
+  frontend_getFollowing(){
+    //TODO connect with endpoint GET /followings
+  }
+
+  frontend_addFollowing(newFollowing){
+    //TODO connect with endpoint PUT /following/id?
+  }
+
+  //////////////////////////////////////////////////////////////////
 
   /**
    * @getFollowing()

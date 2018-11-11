@@ -3,6 +3,9 @@
         <div class="alert alert-success" *ngIf="registStatus">
             <span><b>DING!  </b>Welcome {{userModel.name}}</span>
         </div>
+        <div class="alert alert-danger" *ngIf="duplicateUser">
+            <span><b>Error! </b>Duplicate user!</span>
+        </div>
         <!--ACCOUNT NAME-->
         <div class="form-group" id="regist_account_name">
             <!--This is the part for user account name-->

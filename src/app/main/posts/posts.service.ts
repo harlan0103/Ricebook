@@ -1,15 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { IPosts } from '../../posts';
-
+////////////////////////////
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true'
+  }), withCredentials: true
+};
+////////////////////////////
 @Injectable({
   providedIn: 'root'
 })
 /*Regist this service in app.module*/
 export class PostsService {
-  private _url: string = "../../assets/mock-data/posts.json";
-
+  //private _url: string = "../../assets/mock-data/posts.json";
+  private _url = "http://localhost:3000/"
   constructor(private http: HttpClient) { }
   const 
   /*
@@ -18,7 +25,11 @@ export class PostsService {
 
   }
   */
-
+ ////////////////////////////////////////////////////////////////
+  backend_getPost(): Observable<any>{
+    return this.http.get(this._url + "articles", httpOptions);
+  }
+  //////////////////////////////////////////////////////////////
   getPost(){
     return this.http.get(this._url);
   }

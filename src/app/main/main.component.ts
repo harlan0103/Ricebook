@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
 import { MainService } from './main.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -10,7 +11,7 @@ export class MainComponent implements OnInit {
   search:string = "";
   searchOn:boolean = true;
   searchOff:boolean = false;
-  constructor(private _mainService: MainService) { }
+  constructor(private _mainService: MainService, private router: Router) { }
 
   ngOnInit() {
   }
@@ -26,12 +27,17 @@ export class MainComponent implements OnInit {
    * Show specific content on the post view
    */
   onSearchClick() {    
-
+    this._mainService.backend_getPosts().subscribe(r => {
+      let userPost = r.posts;
+      this.postList = this._mainService.searchKeyWord(this.search, userPost);
+      this.searchOn = false;
+      this.searchOff = true;
+    });
     // Get the postList
-    let userPost = JSON.parse(localStorage.getItem("userPosts"));
-    this.postList = this._mainService.searchKeyWord(this.search, userPost);
-    this.searchOn = false;
-    this.searchOff = true;
+    //let userPost = this.postList;
+    //this.postList = this._mainService.searchKeyWord(this.search, userPost);
+    //this.searchOn = false;
+    //this.searchOff = true;
     /*
     if(this.search == ""){
       return // do nothing
@@ -61,10 +67,14 @@ export class MainComponent implements OnInit {
    * And show all posts on the post view
    */
   onClearSearch() {
-    this.searchOn = true;
-    this.searchOff = false;
     this.search = "";
-    this.postList = JSON.parse(localStorage.getItem("userPosts"));
+    this._mainService.backend_getPosts().subscribe(r => {
+      //let userPost = r.posts;
+      console.log(r.posts);
+      this.postList = r.posts;
+      this.searchOn = true;
+      this.searchOff = false;
+    });
   }
 
   postListEvent($event) {
@@ -72,6 +82,9 @@ export class MainComponent implements OnInit {
   }
 
   Logout() {  
-    this._mainService.logOutUser();
+    this._mainService.logOutUser().subscribe(r => {
+      console.log(r);
+    });
+    this.router.navigate(['/']);
   }
 }

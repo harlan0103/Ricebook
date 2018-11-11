@@ -14,7 +14,7 @@ export class HeadlineComponent implements OnInit {
   constructor(private _headlineService: HeadlineService, private http: HttpClient) { }
 
 
-  public postList = JSON.parse(localStorage.getItem("userPosts"));
+  public postList = [];
   // Create user array
   private users = [];
   public user = [];
@@ -26,7 +26,7 @@ export class HeadlineComponent implements OnInit {
   // A new post
   public newPost: IPosts = {
     "img": "",
-    "time": "Oct 16, 2018",
+    "time": "",
     "author": "",
     "article": "",
     "title": "dummy title",
@@ -64,8 +64,24 @@ export class HeadlineComponent implements OnInit {
    * Then push the new Post to up-to-date postList
    * Emit new List to the post.component
    * Then update postList in localStorage
-   */
+  */
+  ///////////////////////////////////////////////////////////
   addPost() {
+    var newP = {
+      article: this.clearValue,
+      picture: ""
+    }
+
+    this._headlineService.backend_newPost(newP).subscribe(r => {
+      var response = r;
+      this.postList = response.posts;
+      console.log(this.postList);
+      this.addNewPost.emit(this.postList);
+    });
+
+
+  ////////////////////////////////////////////////////////
+/*
     this.postList = JSON.parse(localStorage.getItem("userPosts"));
     console.log(this.clearValue);
     // Create a new post object
@@ -76,6 +92,7 @@ export class HeadlineComponent implements OnInit {
     this.postList.unshift(this.newPost);
     localStorage.setItem("userPosts", JSON.stringify(this.postList));
     this.addNewPost.emit(this.postList);
+    */
     this.clearValue = "";
   }
 
@@ -93,6 +110,11 @@ export class HeadlineComponent implements OnInit {
     this.showStatus = true;
     this.showStatusUpdate = false;
     localStorage.setItem("status", this.userStatus);
+
+    // Should PUT /headline to update the headline
+    this._headlineService.backend_updateHeadline(this.userStatus).subscribe(r => {
+      console.log(r);
+    });
     /*
     this._headlineService.updateUser(this.currentUser).subscribe(data => {
       console.log("PUT Request is successful", this.currentUser);
@@ -116,6 +138,7 @@ export class HeadlineComponent implements OnInit {
     // When page init
     // Use service object to call getUser method
     // Then subscribe observable and get data
+    /*
     this._headlineService.getUser()
         .subscribe(data => {
           console.log(data);
@@ -136,7 +159,17 @@ export class HeadlineComponent implements OnInit {
               console.log(this.currentUser.img);
             }
           }
-        });
+        });*/
+    this.fontend_getHeadline();
   }
+  ////////////////////////////////////////////////////////
+  fontend_getHeadline(){
+    this._headlineService.backend_getHeadline().subscribe(r => {
+      let response = r;
+      console.log(r.headlines[0].headline);
+      this.userStatus = response.headlines[0].headline;
+    });
+  }
+  ////////////////////////////////////////////////////////
 
 }
