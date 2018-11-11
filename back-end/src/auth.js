@@ -33,7 +33,8 @@ const userLogin = (req, res) => {
 		// Get the record from the database by username
 		User.find({username: usr}).exec(function(err, existUser){
 			if(existUser.length == 0){
-				res.status(400).send("No such user")
+				//res.status(400).send("No such user")
+				res.send({result: "INVALID"})
 				return
 			}
 			else{
@@ -44,14 +45,17 @@ const userLogin = (req, res) => {
 				var pwdHash = md5(pwd + ":" + recordSalt)
 				if(pwdHash != recordHash){
 					// Password not match the record
-					res.status(400).send("Password not match")
+					//res.status(400).send("Password not match")
+					res.send({result: "WRONGPASSWORD"})
 				}
 				else{
+					console.log(usr + " is logged In")
 					// Create a session for the user
 					var sessionKey = md5(mySecretMessage + new Date().getTime() + usr)
 					sessionUser[sessionKey] = existUser[0]
 					// Session id is stored as httpOnly cookie
 					res.cookie(cookieKey, sessionKey, {maxAge: 3600*1000, httpOnly: true})
+					console.log(res.cookies)
 					res.send({username: usr, result: "success"})
 				}
 			}
@@ -64,7 +68,7 @@ function isLoggedIn(req, res, next) {
 	// req.cookies[cookieKey] = sessionKey
 	// sessionUser[req.cookies[cookieKey]] = logged in userObject
 	var sid = req.cookies[cookieKey]
-
+	console.log("cookie in isLoggedIn" + req.cookies[cookieKey])
 	if(!sid){
 		return res.sendStatus(401)
 	}
@@ -74,7 +78,7 @@ function isLoggedIn(req, res, next) {
 		req.user = userObj
 		next()
 	} else {
-		res.sendStatus(401)
+		res.send("No userObj")
 	}
 }
 
@@ -82,6 +86,7 @@ function isLoggedIn(req, res, next) {
 const userLogout = (req, res) => {
 	//req.cookies[cookieKey] is the sessionKey
 	//sessionUser[req.cookies[cookieKey]] is the current logged in userObject
+	console.log("Log out session" + req.cookies[cookieKey])
 	res.clearCookie(cookieKey)
 	delete sessionUser[req.cookies[cookieKey]]
 	res.send({username: req.user.username, status: "success log out"})
@@ -98,7 +103,7 @@ const userRegist = (req, res) => {
 	var dob = req.body.dob
 	var zipcode = req.body.zipcode
 	var avatar = "";	// No picture
-
+	console.log("register")
 	// Check if all input information are valid
 	if(!username || !password || !email || !dob || !zipcode){
 		res.status(400).send("Information is not valid")
@@ -108,7 +113,7 @@ const userRegist = (req, res) => {
 		// Check if username is already been taken
 		User.find({username: username}).exec(function(err, existUser){
 			if(existUser.length > 0){
-				res.status(400).send("User already exist")
+				res.send({result: "user exist"})
 				return
 			}
 			else{
@@ -169,6 +174,6 @@ module.exports = (app) => {
 	app.post('/register', userRegist)
 	app.post('/login', userLogin)
 	app.use(isLoggedIn)
-	app.put('/logout', userLogout)
+	app.put('/logout', isLoggedIn, userLogout)
 	app.put('/password', changePwd)
 }

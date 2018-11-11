@@ -7,7 +7,7 @@ const enableCORS = (req, res, next) => {
     res.header('Access-Control-Allow-Origin',req.headers.origin)
     res.header('Access-Control-Allow-Credentials',true)
     res.header('Access-Control-Allow-Methods','GET, PUT, POST, DELETE')
-    res.header('Access-Control-Allow-Headers','Authorization, Content-Type, X-Request-With, X-Session-Id')
+    res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     res.header('Access-Control-Expose-Headers', 'Location, X-Session-Id')
     if(req.method === 'OPTIONS') {
     	res.status(200).send("OK")
@@ -21,9 +21,9 @@ const enableCORS = (req, res, next) => {
 const hello = (req, res) => res.send("hello world")
 
 const app = express()
+app.use(enableCORS)
 app.use(bodyParser.json())
 app.use(cookieParser())
-app.use(enableCORS)
 
 // Create a end point '/' to call hello method
 app.get('/', hello)
