@@ -1,7 +1,7 @@
 <div class="REGISTRATION_TITLE">
     <form #registForm="ngForm"> <!--We have the reference of ngForm by assign the variable name #registForm-->
         <div class="alert alert-success" *ngIf="registStatus">
-            <span><b>DING!  </b>Welcome {{userModel.name}}</span>
+            <span id="regi_success"><b>DING!  </b>Welcome {{userModel.name}}</span>
         </div>
         <div class="alert alert-danger" *ngIf="duplicateUser">
             <span><b>Error! </b>Duplicate user!</span>
@@ -118,7 +118,7 @@
         <div id="registration_btns">
             <!--REGISTRATION BUTTON-->
             <div id="registration_btn">
-                <button [disabled]="registForm.form.invalid" class="btn btn-primary" (click)="registSuccess()">REGISTER</button>
+                <button id="regi_btn" [disabled]="registForm.form.invalid" class="btn btn-primary" (click)="registSuccess()">REGISTER</button>
             </div>
             <!--CLEAR BUTTON-->
             <div id="clear_btn">

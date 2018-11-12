@@ -17,7 +17,8 @@ const httpOptions = {
 })
 export class RegistrationService {
   // This is the loginUrl for /register////////////////////////////////////////
-  private _url = "http://localhost:3000/register";
+  //private _url = "http://localhost:3000/register";
+  private _url = "https://hl74-ricebook-backend.herokuapp.com/register";
   /////////////////////////////////////////////////////////////////////////
   constructor(private http: HttpClient ) { }
   // regist a new userwith given information

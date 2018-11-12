@@ -1,0 +1,48 @@
+<TESTLIST name="front-end e2e test">
+    <TEST>
+        <TESTID>1</TESTID>
+        <TESTCONTENT>1. Should register a new user named realUser</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+    
+    <TEST>
+        <TESTID>2</TESTID>
+        <TESTCONTENT>2. Log in as realUser</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+
+    <TEST>
+        <TESTID>3</TESTID>
+        <TESTCONTENT>3. Create a new article</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+
+    <TEST>
+        <TESTID>4</TESTID>
+        <TESTCONTENT>4. Update headline</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+
+    <TEST>
+        <TESTID>5</TESTID>
+        <TESTCONTENT>5. Log out realUser</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+
+    <TEST>
+        <TESTID>6</TESTID>
+        <TESTCONTENT>6. Log in testUser</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+
+    <TEST>
+        <TESTID>7</TESTID>
+        <TESTCONTENT>7. Search key word</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>
+
+    <TEST>
+        <TESTID>8</TESTID>
+        <TESTCONTENT>8. log out testUser</TESTCONTENT>
+        <STATUS>SUCCESS</STATUS>
+    </TEST>

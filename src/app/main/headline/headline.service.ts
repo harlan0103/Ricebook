@@ -18,7 +18,8 @@ export class HeadlineService {
   // Create the url for user.json
   // following.json 改名 userInfo.json
   //private _url: string = "../../assets/mock-data/following.json";
-  private _url = "http://localhost:3000/"
+  //private _url = "http://localhost:3000/"
+  private _url = "https://hl74-ricebook-backend.herokuapp.com/";
   // Add private http to the constructor
   constructor(private http: HttpClient) { }
 
@@ -37,7 +38,7 @@ export class HeadlineService {
 
   ///////////////////////////////////////////////////////
   backend_getHeadline(): Observable<any>{
-    return this.http.get(this._url + "headlines", httpOptions);
+    return this.http.get(this._url + "headlines/", httpOptions);
   }
 
   backend_updateHeadline(headline){

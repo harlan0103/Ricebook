@@ -10,12 +10,12 @@
     <!--Field for user to write new post-->
     <div class="headline_user_add_new_post">
       <!--Use ngModel two way bind to clear out the value-->
-      <textarea placeholder="Share your post" [(ngModel)]="clearValue"></textarea>
+      <textarea id="add_new_post" placeholder="Share your post" [(ngModel)]="clearValue"></textarea>
 
       <div class="headline_user_add_new_post_btns">
 
         <div class="headline_btn_share">
-          <button class="btn btn-primary" (click)="addPost()">Share</button>
+          <button id="share_new_post" class="btn btn-primary" (click)="addPost()">Share</button>
         </div>
 
         <div class="headline_btn_clear">
@@ -30,17 +30,17 @@
         <img src="./assets/img/logo.png">
       </div>
 
-      <div class="headline_user_status" *ngIf="showStatus" (click)="clickUserStatus()">
+      <div id="user_headline_click" class="headline_user_status" *ngIf="showStatus" (click)="clickUserStatus()">
         <!-- In order to change the status, user hard code instead
           <span>{{currentUser.status}}</span>
         -->
-        <span>{{userStatus}}</span>
+        <span id="user_headline">{{userStatus}}</span>
       </div>
       <!--hide or show update textare based on the status-->
       <div class="headline_user_status_update" *ngIf="showStatusUpdate">
         <!--<textarea>{{currentUser.status}}</textarea>-->
-          <textarea [(ngModel)]="userStatus"></textarea>
-          <button class="btn btn-primary btn-sm" (click)="clickUpdateStatus()">Save</button>
+          <textarea id="user_headline_update" [(ngModel)]="userStatus"></textarea>
+          <button id="user_headline_update_btn" class="btn btn-primary btn-sm" (click)="clickUpdateStatus()">Save</button>
       </div>
 
       <!--User follow follower posts information-->

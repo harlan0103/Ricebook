@@ -11,11 +11,11 @@
       </div>
     
       <div class="search_bar">
-        <textarea placeholder="Search" [(ngModel)]="search"></textarea>
+        <textarea placeholder="Search" id="search_content" [(ngModel)]="search"></textarea>
       </div>
     
       <div class="search_btn">
-        <button class="btn btn-default" (click)="onSearchClick()" *ngIf="searchOn">Search</button>
+        <button id="post_search_btn" class="btn btn-default" (click)="onSearchClick()" *ngIf="searchOn">Search</button>
         <button class="btn btn-default" (click)="onClearSearch()" *ngIf="searchOff">Clear</button>
       </div>
     
@@ -24,7 +24,7 @@
       </div>
     
       <div class="user_logout">
-        <span (click)="Logout()">Logout</span>
+        <span id="log_out_btn" (click)="Logout()">Logout</span>
       </div>
     </div>
   </div>

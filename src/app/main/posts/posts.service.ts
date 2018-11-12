@@ -16,7 +16,8 @@ const httpOptions = {
 /*Regist this service in app.module*/
 export class PostsService {
   //private _url: string = "../../assets/mock-data/posts.json";
-  private _url = "http://localhost:3000/"
+  //private _url = "http://localhost:3000/"
+  private _url = "https://hl74-ricebook-backend.herokuapp.com/";
   constructor(private http: HttpClient) { }
   const 
   /*

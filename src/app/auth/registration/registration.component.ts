@@ -37,6 +37,7 @@ export class RegistrationComponent implements OnInit {
     this._registerService.register(this.userModel).subscribe(value => {
       //console.log(value);
       if(value.status == "success"){
+        console.log(value.status);
         this.registStatus = true;
         this.duplicateUser = false;
         //this.registerClear();
