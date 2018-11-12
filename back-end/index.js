@@ -10,22 +10,19 @@ const enableCORS = (req, res, next) => {
     res.header("Access-Control-Allow-Headers", "Access-Control-Allow-Headers, Access-Control-Allow-Credentials, Origin,Accept, X-Requested-With, Content-Type, Access-Control-Request-Method, Access-Control-Request-Headers");
     res.header('Access-Control-Expose-Headers', 'Location, X-Session-Id')
     if(req.method === 'OPTIONS') {
-    	res.status(200).send("OK")
+        res.status(200).send("OK")
     } else {
-    	next()
+        next()
     }
 }
 
-
-// Response "hello world" send to server
-const hello = (req, res) => res.send("hello world")
+const hello = (req, res) => res.send({ hello: 'world' })
 
 const app = express()
 app.use(enableCORS)
 app.use(bodyParser.json())
 app.use(cookieParser())
 
-// Create a end point '/' to call hello method
 app.get('/', hello)
 
 // Add all endpoints
@@ -34,16 +31,9 @@ require('./src/profile.js')(app)
 require('./src/articles.js')(app)
 require('./src/following.js')(app)
 
-// add this to index.js
-// Loading module
-// It will be loaded first on startup
-if(process.env.NODE_ENV !== "production"){
-	require('dot-env')
-}
-
-// Initialize the localhost:3000 port
-const port = process.env.Port || 3000
-const server = app.listen(port, ()=> {
-	const address = server.address();
-	console.log(`server listening at http://${address.address}:${address.port}`);
-});
+// Get the port from the environment, i.e., Heroku sets it
+const port = process.env.PORT || 3000
+const server = app.listen(port, () => {
+    const addr = server.address()
+    console.log(`Server listening at http://${addr.address}:${addr.port}`)
+})

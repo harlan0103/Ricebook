@@ -1,4 +1,3 @@
-const crypto = require('crypto')
 const md5 = require('md5')
 const cookieParser = require('cookie-parser')
 const User = require('./model.js').User
@@ -64,11 +63,11 @@ const userLogin = (req, res) => {
 }
 
 // isLoggedIn function grab cookie from the request
-function isLoggedIn(req, res, next) {
+const isLoggedIn = (req, res, next) => {
 	// req.cookies[cookieKey] = sessionKey
 	// sessionUser[req.cookies[cookieKey]] = logged in userObject
 	var sid = req.cookies[cookieKey]
-	console.log("cookie in isLoggedIn" + req.cookies[cookieKey])
+	console.log("cookie in isLoggedIn " + req.cookies[cookieKey])
 	if(!sid){
 		return res.sendStatus(401)
 	}

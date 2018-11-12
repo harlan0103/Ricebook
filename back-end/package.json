@@ -1,5 +1,5 @@
 {
-  "name": "backend",
+  "name": "backend-ricebook",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -15,9 +15,6 @@
     "express": "^4.16.4",
     "isomorphic-fetch": "^2.2.1",
     "md5": "^2.2.1",
-    "mongoose": "^5.3.10"
-  },
-  "devDependencies": {
-    "dot-env": "0.0.1"
+    "mongoose": "^5.3.11"
   }
 }
