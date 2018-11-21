@@ -3,17 +3,6 @@ const cookieParser = require('cookie-parser')
 const User = require('./model.js').User
 const Profile = require('./model.js').Profile
 
-/////////////////////////////////////////////////
-///////// Test data for stub endpoint ///////////
-const testUser = [
-	{
-		username: "testUser1",
-		password: "pwd"
-	}
-]
-/////////////////////////////////////////////////
-/////////////////////////////////////////////////
-
 // function userLogin for endpoint POST '/login'
 const sessionUser = {}
 const cookieKey = 'sid'
@@ -142,32 +131,43 @@ const userRegist = (req, res) => {
 	}
 }
 
-///////////////////////////////////////////////
-//////////   		STUB         //////////////
-///////////////////////////////////////////////
-
 /*
 function changePwd for endpoint PUT '/password'
-STUB for '/password'
+Change current user password
 */
 const changePwd = (req, res) => {
-	var currentUser = testUser[0].username
+	// Get current user
+	var currentUser = req.user.username
+	// Get new pwd
 	var newPwd = req.body.password
 	if(!newPwd){
 		res.status(500).send("No password entered")
 		return
 	}
-	var userObj = testUser.find(c => c.username === currentUser)
-	if(!userObj){
-		res.status(500).send("No such user object")
-		return
-	}
-	else{
-		userObj.password = newPwd
-		res.send({username: currentUser, password: newPwd, result: "success"})
-	}
+	User.find({username: currentUser}).exec(function(err, userObj){
+		if(err){
+			res.send("No such user")
+			return
+		}
+		else{
+			// Find current logged in user profile and change its password
+			// First get the salt value
+			var salt = userObj[0].salt
+			var newHash = md5(newPwd + ":" + salt)
+			console.log(newHash)
+			User.update({username: currentUser}, {hash: newHash}, function(err){
+				if(err){
+					res.send("something wrong")
+					return
+				}
+				else{
+					// Send change success message
+					res.send({username: currentUser, status: "success"})
+				}
+			})
+		}
+	})
 }
-///////////////////////////////////////////////
 
 module.exports = (app) => {
 	app.post('/register', userRegist)

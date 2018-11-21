@@ -23,7 +23,7 @@ var profileSchema = new mongoose.Schema({
 
 // Create comments schema
 var commentSchema = new mongoose.Schema({
-	commentId: Number,
+	commentId: String,
 	author: String,
 	body: String,
 	date: Date
