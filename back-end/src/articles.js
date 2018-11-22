@@ -1,6 +1,7 @@
 const md5 = require('md5')
 const Post = require('./model.js').Post
 const Comment = require('./model.js').Comment
+const Profile = require('./model.js').Profile
 
 /*
 Function getArticles for endpoint GET '/articles.:id?'
@@ -16,7 +17,32 @@ const getArticles = (req, res) => {
 			res.status(500).send("No user logged in")
 		}
 		else{
+			// Find user profile
+			Profile.find({username: currentUser}).exec(function(err, userObj){
+				if(!userObj){
+					res.send("No such user")
+					return
+				}
+				else{
+					// Find user profile then get the following list
+					var userProfile = userObj[0]
+					// Get a users to query list
+					var usersToQuery = [ userProfile.username, ...userProfile.following]
+					// Query the most recent 10 posts of current user
+					// The $in operator selects the documents where the value of a field equals any value in the specified array.
+					Post.find({author: {$in: usersToQuery}}).limit(10).sort({date: -1}).exec(function(err, postObj){
+						if(err){
+							res.send("err")
+							return
+						}
+						else{
+							res.send({posts: postObj})	
+						}
+					})
+				}
+			})
 			// Find user articles in Post schema
+			/*
 			Post.find({author: currentUser}).exec(function(err, userPost){
 				if(!userPost){
 					res.status(500).send("No articles for user")
@@ -28,6 +54,7 @@ const getArticles = (req, res) => {
 					res.send({posts: postList})
 				}
 			})
+			*/
 		}
 	}
 	else{
@@ -68,10 +95,13 @@ const postNewArticle = (req, res) => {
 		}
 		else{
 			Post.find({author: currentUser}).exec(function(err, posts){
-				var id = (posts.length == 0) ? 1 : posts.length + 1
+				// Use postNum to indicate the post number of current user
+				var postNum = (posts.length == 0) ? 1 : posts.length + 1
+				// Use mad5 to generate unique id number for each post
+				var id = md5(currentUser + postNum + date)
 				// Add new post to the Post schema
-				new Post({id: id, author: currentUser, body: body, date: date, picture: picture, comment: comment}).save(function(err, article){
-					if(err) return res.status(500).send("Error")
+				new Post({postNum: postNum, id: id, author: currentUser, body: body, date: date, picture: picture, comment: comment}).save(function(err, article){
+					if(err) return res.status(500).send(err)
 					// After insert return a list of posts of current user
 					var postList = []
 					Post.find({author: currentUser}).exec(function(err, posts){

@@ -31,7 +31,8 @@ var commentSchema = new mongoose.Schema({
 
 // Create posts schema
 var postSchema = new mongoose.Schema({
-	id: Number,
+	postNum: Number,
+	id: String,
 	author: String,
 	body: String,
 	date: Date,

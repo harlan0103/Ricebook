@@ -2,7 +2,9 @@ var mongoose = require('mongoose')
 
 // replace this "localhost" value with the one from heroku/mlab
 //var url = 'mongodb://localhost:27017/webdev'
-var url = 'mongodb://ricebook:123rice@ds129762.mlab.com:29762/heroku_zht3cpvz'
+//var url = 'mongodb://ricebook:123rice@ds129762.mlab.com:29762/heroku_zht3cpvz'
+// Test database
+var url = 'mongodb://testuser:123test@ds255403.mlab.com:55403/ricebook'
 
 if (process.env.MONGOLAB_URI) {
 	url = process.env.MONGOLAB_URI;
