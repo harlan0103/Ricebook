@@ -2,6 +2,7 @@ const md5 = require('md5')
 const Post = require('./model.js').Post
 const Comment = require('./model.js').Comment
 const Profile = require('./model.js').Profile
+const User = require('./model.js').User
 
 /*
 Function getArticles for endpoint GET '/articles.:id?'

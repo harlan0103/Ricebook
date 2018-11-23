@@ -1,5 +1,5 @@
 const Profile = require('./model.js').Profile
-
+const User = require('./model.js').User
 /* 
 Function getFollowing for endpoint GET '/following/:user?'
 Get following list of current user
@@ -15,8 +15,19 @@ const getFollowing = (req, res) => {
 		else{
 			// Send the following list of curent user
 			var followingList = userObj[0].following
-			console.log(followingList)
-			res.send({username: currentUser, following: followingList})
+			// Find all following user information
+			Profile.find({username: {$in : followingList}}).exec(function(err, userObj){
+				var returnList = []
+				for(var i = 0; i < userObj.length; i++){
+					// Add current followed user detail to the result list
+					returnList.push({username: userObj[i].username,
+						headline: userObj[i].headline,
+						avatar: userObj[i].avatar
+					})
+				}
+				// Return the list
+				res.send({following: returnList})
+			})
 		}
 	})
 }
@@ -33,9 +44,9 @@ const addFollowing = (req, res) => {
 		return
 	}
 	// Find current user in database
-	Profile.find({username: addUser}).exec(function(err, userObj){
-		if(!userObj){
-			res.send("No such user")
+	User.find({username: addUser}).exec(function(err, userObj){
+		if(userObj.length == 0){
+			res.send({result: "Invalid user"})
 			return
 		}
 		else{
@@ -49,14 +60,15 @@ const addFollowing = (req, res) => {
 					var followingList = userObj[0].following
 					// Check if following list has already contains the add user
 					if(followingList.indexOf(addUser) != -1){
-						res.send("user already exist")
+						res.send({result: "Dupliacte"})
+						return
 					}
 					else{
 						// Update user followingl list
 						followingList.push(addUser)
 						Profile.update({username: currentUser}, {following: followingList}, function(err){
 							if(err){
-								res.send("Some error")
+								res.send({err: err})
 								return
 							}
 							else{

@@ -90,6 +90,7 @@ const userRegist = (req, res) => {
 	var email = req.body.email
 	var dob = req.body.dob
 	var zipcode = req.body.zipcode
+	var phone = req.body.phone
 	var avatar = "";	// No picture
 	console.log("register")
 	// Check if all input information are valid
@@ -120,7 +121,7 @@ const userRegist = (req, res) => {
 				})
 
 				// Insert new Profile into database
-				new Profile({username: username, headline: headline, following: following, email: email, dob: dob, zipcode: zipcode, avatar: avatar}).save(function(err){
+				new Profile({username: username, headline: headline, following: following, email: email, dob: dob, phone:phone, zipcode: zipcode, avatar: avatar}).save(function(err){
 					if(err) res.status(500).send("Error")
 				})
 

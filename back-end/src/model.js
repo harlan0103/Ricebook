@@ -17,6 +17,7 @@ var profileSchema = new mongoose.Schema({
 	following: [String],
 	email: String,
 	dob: String,
+	phone: String,
 	zipcode: String,
 	avatar: String
 })

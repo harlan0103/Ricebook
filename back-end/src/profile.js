@@ -1,7 +1,7 @@
 // This is profile.js which contains all user profile
 // Information except passwords which is in auth.js
 const Profile = require('./model.js').Profile
-
+const uploadImage = require('./uploadCloudinary.js').uploadImage
 /*
 Function getHeadlines for endpoint '/headlines/:users?'
 Return array with 1 element containing headline for logged in user
@@ -187,18 +187,31 @@ const getAvatars = (req, res) => {
 	})
 }
 
-///////////////////////////////////////////////
-//////////   		STUB         //////////////
-///////////////////////////////////////////////
-// function putAvatar for endpoint PUT '/avatar'
+/*
+Function putAvatar for endpoint PUT '/avatar'
+Use middleware uploadImage to upload avatar to cloudinary
+*/
 const putAvatar = (req, res) => {
-	// Get new avatar
-	// Should be a image file?
-	var avatar = req.body.avatar
-	if(!avatar) res.status(400).send("Not provide avatar");
-	res.send({username: "dummy", avatar: avatar})
+	// Get logged in user
+	var currentUser = req.user.username
+	// Get avatar url from uploadImage middleware
+	var avatar = req.fileurl
+	if(!avatar) {
+		res.send("Not provide avatar");
+		return
+	}
+	else{
+		Profile.update({username: currentUser}, {avatar: avatar}, function(err){
+			if(err){
+				res.send("error occurs")
+				return
+			}
+			else{
+				res.send({username:currentUser, avatar: avatar})
+			}
+		})
+	}
 }
-///////////////////////////////////////////////
 
 module.exports = (app) => {
 	//app.get('/headline/:user', getHeadline)
@@ -210,5 +223,5 @@ module.exports = (app) => {
 	app.get('/zipcode/:user?', getZipcode)
 	app.put('/zipcode', putZipcode)
 	app.get('/avatars/:users?', getAvatars)
-	app.put('/avatar', putAvatar)
+	app.put('/avatar', uploadImage('avatar'), putAvatar)
 }
