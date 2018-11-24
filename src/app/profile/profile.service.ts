@@ -1,45 +1,59 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { IProfile } from '../profile';
-import { userProfile } from '../user_profile';
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type': 'application/json',
+    'Access-Control-Allow-Credentials': 'true'
+  }), withCredentials: true
+};
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class ProfileService {
-  // Create url
-  private _url:string = "../../assets/mock-data/profile.json";
   constructor(private http: HttpClient) { }
-  // Function to get user information
-  getUser():Observable<IProfile[]>{
-    return this.http.get<IProfile[]>(this._url);
+
+  private _url = "https://hl74-ricebook-backend-final.herokuapp.com/";
+
+  // Get user email
+  backend_getEmail(): Observable<any>{
+    return this.http.get(this._url + "email", httpOptions);
   }
 
-  fetchLoggedInUser(username, userProfile: IProfile[]) {
-    //console.log(userProfile);
-    //console.log(username);
-    let profile: userProfile = {
-      username: "",
-      displayname: "",
-      email: "",
-      zipcode: "",
-      dob: "",
-      img: ""
-    };
+  // Get user date of birth
+  backend_getDob(): Observable<any>{
+    return this.http.get(this._url + "dob", httpOptions);
+  }
 
-    //let profile: IProfile;
-    for(let i = 0; i < userProfile.length; i++){
-      if(username == userProfile[i].username){
-        profile.username = userProfile[i].username;
-        profile.displayname = userProfile[i].displayname;
-        profile.email = userProfile[i].email;
-        profile.dob = userProfile[i].dob;
-        profile.zipcode = userProfile[i].zipcode;
-        profile.img = userProfile[i].img;
-      }
-    }
-    //console.log(profile);
-    return profile;
+  // Get user zipcode
+  backend_getZipcode(): Observable<any>{
+    return this.http.get(this._url + "zipcode", httpOptions);
+  }
+
+  // Get user img
+  backend_getImg(): Observable<any>{
+    return this.http.get(this._url + "avatars", httpOptions);
+  }
+
+  // Update user email
+  backend_updateEmail(email){
+    return this.http.put(this._url + "email", {email: email}, httpOptions);
+  }
+
+  // Update user zipcode
+  backend_updateZipcode(zipcode){
+    return this.http.put(this._url + "zipcode", {zipcode: zipcode}, httpOptions);
+  }
+  
+  // Upload a new avatar
+  backend_uploadAvatar(avatar): Observable<any>{
+    return this.http.put(this._url + "avatar", avatar, {
+      // Since we are uploading a non-json object, then we need to change the header
+      headers: new HttpHeaders({'Access-Control-Allow-Credentials': 'true'}),
+      withCredentials: true
+    });
   }
 }

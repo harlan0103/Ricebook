@@ -6,6 +6,9 @@
       <div class="posts_post">
 
         <div class="posts_post_title_time">
+          <!--
+          <span>{{post.id}}</span>
+          -->
           <h3>{{post.title}}</h3>
           <span id="post_author">{{post.author}}</span>
           <span>{{post.date}}</span>
@@ -16,28 +19,42 @@
           <div class="posts_post_img">
             <img src={{post.picture}}>
           </div>
-          <div class="posts_post_article">
+          <div class="posts_post_article" *ngIf="editable(post.id)">
             <span id="post_id">{{post.body}}</span>
           </div>
-          
+          <!--Edit textarea after user clicked edit button-->
+          <div class="posts_post_article" *ngIf="savable(post.id)">
+            <textarea class="post_post_edit" id="post_id" rows="7" [(ngModel)]="post.body">{{post.body}}</textarea>
+          </div>
         </div>
         
       </div>
 
       <div class="posts_btns">
-        <button class="btn btn-primary">Edit</button>
-        <button class="btn btn-primary" (click)="clickComment()">Comment</button>
+        <button class="btn btn-primary" [disabled]="!checkPostUser(post.author)" (click)="editPost(post.id)" *ngIf="editable(post.id)">Edit</button>
+        <button class="btn btn-primary" (click)="savePostChange(post.body)" *ngIf="savable(post.id)">Save</button>
+        <button class="btn btn-primary" (click)="clickComment(post.id)">Comment</button>
       </div>
       
-      <div *ngIf="showComment">
-      <div *ngFor="let comment of post.comments" class="postComment" >
-        <span id="comment_username">{{comment.username}}:</span>
-        <span id="comment_comment">{{comment.comment}}</span>
-      </div>
+      <div *ngIf="showComment(post.id)">
+        
+        <!--User give comment-->
+        <div class="login_user_comment_area">
+          <span id="login_username">{{loginUser}}</span>
+          <input id="login_comment" [(ngModel)]="comment" placeholder="Comment...">
+          <button class="btn btn-primary" id="comment_submit" (click)="uploadNewComment(post.id, comment)">Submit</button>
+        </div>
+        <div *ngFor="let comment of post.comments" class="postComment" >
+          <span id="comment_username">{{comment.author}}:</span>
+
+          <!--Comment edit area-->
+          <span id="comment_comment" *ngIf="!comment_editable || !commentEditEnable(comment.author)">{{comment.body}}</span>
+          <textarea rows = "1" id="comment_comment_textarea" [(ngModel)]="comment.body" *ngIf="commentEditEnable(comment.author) && comment_editable">{{comment.body}}</textarea>
+          <button id="comment_edit" (click)="editComment(comment.commentId)" *ngIf="commentEditEnable(comment.author) && !comment_editable">Edit</button>
+          <button id="comment_edit" (click)="saveEditComment(post.id, comment.commentId, comment.body)" *ngIf="commentEditEnable(comment.author) && comment_editable">Save</button>
+        </div>
       </div>
   </div>
-
-  
 </div>
 
 

@@ -2,7 +2,6 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { HeadlineService } from '../headline/headline.service';
 import { IFollowing } from 'src/app/following';
 import { HttpClient } from '@angular/common/http';
-import { IPosts } from 'src/app/posts';
 
 @Component({
   selector: 'app-headline',
@@ -13,33 +12,25 @@ export class HeadlineComponent implements OnInit {
   // Create headlineService in constructor
   constructor(private _headlineService: HeadlineService, private http: HttpClient) { }
 
+  // Logged in user avatar
+  avatar = "";
+  // New post img
+  private postImg = "https://res.cloudinary.com/hnerpaq6a/image/upload/v1543000967/add.png";
 
   public postList = [];
   // Create user array
-  private users = [];
   public user = [];
   loginUser: string;
 
   //@Output() addNewPost = new EventEmitter();
   @Output() addNewPost = new EventEmitter();
 
-  // A new post
-  public newPost: IPosts = {
-    "img": "",
-    "time": "",
-    "author": "",
-    "article": "",
-    "title": "dummy title",
-    "comment": ""
-  };
-
+  // Show or hide headline
   showStatusUpdate: boolean = false;
   showStatus: boolean = true;
 
   userStatus: string = localStorage.getItem("status");
 
-  statusUpdate: string;
-  testUser: object = {};
   currentUser: IFollowing = {
     netID: "",
     username: "",
@@ -49,127 +40,114 @@ export class HeadlineComponent implements OnInit {
     img: "",
   }
 
-  /*When user click clear button for new post, set textarea value to ' '*/
-  clearValue: string ='';
-  clearOnClick() {
-    console.log("clear btn");
-    this.clearValue ='';
+  /**
+   * When paged is loaded
+   */
+  ngOnInit() {
+    // Get user information when page loaded
+    this.fontend_getHeadline();
+    this.front_getAvatar();
   }
 
+  /**
+   * Service return current logged in user headline
+   */
+  fontend_getHeadline(){
+    this._headlineService.backend_getHeadline().subscribe(data => {
+      let response = data;
+      this.userStatus = response.headlines[0].headline;
+    });
+  }
 
   /**
-   * @addPost()
+   * Service return current logged in user avatar
+   */
+  front_getAvatar(){
+    this._headlineService.backend_getAvatar().subscribe(data => {
+      if(data.avatars[0].avatar == ""){
+        this.avatar = "https://res.cloudinary.com/hnerpaq6a/image/upload/v1542926593/Owls.png";
+      }
+      else{
+        this.avatar = data.avatars[0].avatar;
+      }
+    });
+  }
+
+  /**
    * When user click "share" button
    * Create a new IPost class and add information to that newPost
    * Then push the new Post to up-to-date postList
    * Emit new List to the post.component
    * Then update postList in localStorage
   */
-  ///////////////////////////////////////////////////////////
-  addPost() {
+  front_addPost(){
+    // Create new newPost obj
     var newP = {
       article: this.clearValue,
-      picture: ""
+      picture: this.postImg
     }
-
-    this._headlineService.backend_newPost(newP).subscribe(r => {
-      var response = r;
-      this.postList = response.posts;
-      console.log(this.postList);
-      this.addNewPost.emit(this.postList);
+    // Put new added post to the backend server
+    this._headlineService.backend_newPost(newP).subscribe(data => {
+      // Get all posts
+      this.front_getPost();
     });
-
-
-  ////////////////////////////////////////////////////////
-/*
-    this.postList = JSON.parse(localStorage.getItem("userPosts"));
-    console.log(this.clearValue);
-    // Create a new post object
-    // Set the article
-    this.newPost.article = this.clearValue;
-    this.newPost.author = localStorage.getItem("currentUser");
-    this.newPost.time = Date();
-    this.postList.unshift(this.newPost);
-    localStorage.setItem("userPosts", JSON.stringify(this.postList));
-    this.addNewPost.emit(this.postList);
-    */
+    // After add new post, clear the textarea and set img to default
     this.clearValue = "";
+    this.postImg = "https://res.cloudinary.com/hnerpaq6a/image/upload/v1543000967/add.png";
   }
 
+  /**
+   * Get users post and following posts with limit of 10 from backend
+   */
+  front_getPost(){
+    // Get user posts and following list from server
+    this._headlineService.backend_getPost().subscribe(data => {
+      this.postList = data.posts;
+      //console.log(this.postList);
+      this.addNewPost.emit(this.postList);
+    });
+  }
 
+  /**
+  * Clear user typed text
+  */
+  clearValue: string ='';
+  clearOnClick() {
+    this.clearValue ='';
+  }
 
-
-  /*When click userstatus, hide current user status and show the textarea for user to edit*/
+  /**
+  * When click user headline, show the rditable textarea for updating user headline
+  */
   clickUserStatus(){
     this.showStatus = false;
     this.showStatusUpdate = true;
   }
 
-  /*When click save button, save the update value and display the user status*/
+  /**
+  * When click save button, update the new headline to server
+  */
   clickUpdateStatus(){
     this.showStatus = true;
     this.showStatusUpdate = false;
     localStorage.setItem("status", this.userStatus);
-
     // Should PUT /headline to update the headline
-    this._headlineService.backend_updateHeadline(this.userStatus).subscribe(r => {
-      console.log(r);
-    });
-    /*
-    this._headlineService.updateUser(this.currentUser).subscribe(data => {
-      console.log("PUT Request is successful", this.currentUser);
-    },
-    error => {
-      console.log("Error", error);
-    });
-    
-    this.testUser = {
-      "id": 2,
-      "username": "Ecophobia",
-      "status": "123", 
-      "img": "../../assets/img/user2.png"
+    this._headlineService.backend_updateHeadline(this.userStatus).subscribe();
+  }
+
+  /**
+   * Upload post image to Cloudinary
+   * @param $event 
+   */
+  uploadImg(event: any){
+    if(event.target.files && event.target.files[0]){
+      // Set the img value
+      var fd = new FormData();
+      fd.append('image', event.target.files[0])
+      // Get the image url in Cloudinary
+      this._headlineService.uploadImage(fd).subscribe(data => {
+        this.postImg = data.image;
+      });
     }
-
-    this.http.put("../../assets/mock-data/following.json", this.testUser).subscribe();
-    */
   }
-
-  ngOnInit() {
-    // When page init
-    // Use service object to call getUser method
-    // Then subscribe observable and get data
-    /*
-    this._headlineService.getUser()
-        .subscribe(data => {
-          console.log(data);
-          this.users = data;
-          this.loginUser = localStorage.getItem("currentUser");
-          for(let i = 0; i < this.users.length; i++){
-            console.log(this.users[i].netID);
-            if(this.users[i].username == this.loginUser){
-              // We find the current user
-              //this.user = this.users[i];
-              this.currentUser.netID = this.loginUser;
-              this.currentUser.status = this.users[i].status;
-              // Set user status to the local storage and get the status
-              this.currentUser.following = this.users[i].following.length;
-              console.log(this.currentUser.following)
-              this.currentUser.follower = this.users[i].follower.length;
-              this.currentUser.img = this.users[i].img;
-              console.log(this.currentUser.img);
-            }
-          }
-        });*/
-    this.fontend_getHeadline();
-  }
-  ////////////////////////////////////////////////////////
-  fontend_getHeadline(){
-    this._headlineService.backend_getHeadline().subscribe(r => {
-      let response = r;
-      console.log(r.headlines[0].headline);
-      this.userStatus = response.headlines[0].headline;
-    });
-  }
-  ////////////////////////////////////////////////////////
-
 }

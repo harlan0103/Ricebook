@@ -61,6 +61,12 @@
     height: 5%;
 }
 
+.post_post_edit {
+    width: 100%;
+    height: 100%;
+    resize: none;
+}
+
 .posts_btns {
     width: 100%;
     height: auto;
@@ -99,4 +105,60 @@
 
 .postComment #comment_username {
     font-weight: bold;
+}
+
+.login_user_comment_area {
+    width: 100%;
+    height: auto;
+    display: inline-block;
+    border-bottom: 1px dashed gray;
+}
+
+#comment_submit {
+    margin-bottom: 1%;
+    margin-right: 2%;
+    margin-top: 1%;
+    float: right;
+}
+
+#login_comment {
+    width: 70%;
+    font-size: 140%;
+    margin: auto;
+    margin-top: 1%;
+    margin-left: 2%;
+    border-radius: 10px;
+    border: 1px solid gray;
+    text-indent: 2%;
+    background: none;
+    outline: none;
+}
+
+#login_username {
+    font-size: 130%;
+    margin-left: 1%;
+}
+
+#comment_edit {
+    float: right;
+    margin-right: 3%;
+    background: none;
+    outline: none;
+    border: none;
+    border-bottom: 1px dashed gray;
+    color: gray;
+}
+
+#comment_edit:hover {
+    cursor: pointer;
+}
+
+#comment_comment_textarea {
+    width: 40%;
+    margin-left: 1%;
+    padding-left: 2%;
+    padding-right: 2%;
+    border-radius: 7px;
+    background-color: #D5D5D5;
+    resize: none;
 }

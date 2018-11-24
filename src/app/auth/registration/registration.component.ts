@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../../user_registration';
-import { AbstractControl } from '@angular/forms';
 import { RegistrationService } from './registration.service';
 
 @Component({
@@ -8,7 +7,9 @@ import { RegistrationService } from './registration.service';
   templateUrl: './registration.component.html',
   styleUrls: ['./registration.component.css']
 })
+
 export class RegistrationComponent implements OnInit {
+
   registStatus:boolean = false;
   duplicateUser:boolean = false;
   // Create a new userModel to recieve user input
@@ -27,17 +28,19 @@ export class RegistrationComponent implements OnInit {
 
   constructor(private _registerService: RegistrationService) { }
 
-  ngOnInit() {
-  
-  }
+  ngOnInit() { }
 
+  /**
+   * Register a new user based on user input
+   * Check the duplicate user status
+   */
   registSuccess(){
-    console.log(this.userModel);
+    //console.log(this.userModel);
     // Get the registration information and send it to the service
     this._registerService.register(this.userModel).subscribe(value => {
       //console.log(value);
       if(value.status == "success"){
-        console.log(value.status);
+        //console.log(value.status);
         this.registStatus = true;
         this.duplicateUser = false;
         //this.registerClear();
@@ -46,7 +49,7 @@ export class RegistrationComponent implements OnInit {
         this.duplicateUser = true;
       }
     }, err => {
-      console.log(err);
+      //console.log(err);
     })
   }
 }

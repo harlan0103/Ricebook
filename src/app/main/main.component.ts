@@ -33,31 +33,6 @@ export class MainComponent implements OnInit {
       this.searchOn = false;
       this.searchOff = true;
     });
-    // Get the postList
-    //let userPost = this.postList;
-    //this.postList = this._mainService.searchKeyWord(this.search, userPost);
-    //this.searchOn = false;
-    //this.searchOff = true;
-    /*
-    if(this.search == ""){
-      return // do nothing
-    }
-    else {
-      // Set the postList to null
-      this.postList = [];
-      console.log(this.search);
-      // Get the postList
-      let userPost = JSON.parse(localStorage.getItem("userPosts"));
-      console.log(userPost);
-      // Check for the author
-      for(let i = 0; i < userPost.length; i++){
-        if(userPost[i].author.toLowerCase().includes(this.search.toLowerCase()) 
-        || userPost[i].article.toLowerCase().includes(this.search.toLowerCase())){
-          this.postList.push(userPost[i]);
-        }
-      }
-    }
-    */
   }
 
   /**
@@ -69,8 +44,6 @@ export class MainComponent implements OnInit {
   onClearSearch() {
     this.search = "";
     this._mainService.backend_getPosts().subscribe(r => {
-      //let userPost = r.posts;
-      console.log(r.posts);
       this.postList = r.posts;
       this.searchOn = true;
       this.searchOff = false;
@@ -82,9 +55,7 @@ export class MainComponent implements OnInit {
   }
 
   Logout() {  
-    this._mainService.logOutUser().subscribe(r => {
-      console.log(r);
-    });
+    this._mainService.logOutUser().subscribe();
     this.router.navigate(['/']);
   }
 }

@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FollowingComponent } from './following.component';
 
 describe('FollowingComponent', () => {

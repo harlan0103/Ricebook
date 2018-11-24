@@ -1,21 +1,21 @@
 <div>
   <!--Use *ngFor to fetch following data from followings array-->
-  <div *ngFor="let following of followingList" class="following_user_info">
+  <div *ngFor="let user of followingList" class="following_user_info">
 
     <div class="following_user_detail">
       <div class="following_img_username">
-        <img class="following_img" src={{following.img}}>
+        <img class="following_img" src={{user.avatar}}>
           
         <div class="following_username">
-          {{following.username}}
+          {{user.username}}
         </div>   
         <!--When click remove icon, remove the user-->
-        <img class="unfollow" src="../../../assets/img/unfollow.png" (click)="deleteFollowing(following.username)">
+        <img class="unfollow" src="../../../assets/img/unfollow.png" (click)="frontend_deleteFollowing(user.username)">
 
       </div>
         
       <div class="following_status">
-        {{following.status}}
+        {{user.headline}}
       </div>
 
     </div>
@@ -36,6 +36,12 @@
   <div id="invalidUser">
     <span *ngIf="invalidUser">Invalid user</span>
   </div>
-  
 
+  <div id="invalidUser">
+    <span *ngIf="emptyUser">Please enter a username</span>
+  </div>
+
+  <div id="invalidUser">
+    <span *ngIf="duplicateUser">Duplicate user</span>
+  </div>
 </div>

@@ -3,8 +3,8 @@
   <div class="headline_user_new_post">
     <!--Field for user to add new img-->
     <div class="headline_user_add_new_img">
-      <img alt="temporary img" id="add_img" src="../../../assets/img/add.png">
-      <input type="file">
+      <img alt="temporary img" id="add_img" src={{postImg}}>
+      <input type="file" accept="image/*" (change)="uploadImg($event)">
     </div>
 
     <!--Field for user to write new post-->
@@ -15,7 +15,7 @@
       <div class="headline_user_add_new_post_btns">
 
         <div class="headline_btn_share">
-          <button id="share_new_post" class="btn btn-primary" (click)="addPost()">Share</button>
+          <button id="share_new_post" class="btn btn-primary" (click)="front_addPost()">Share</button>
         </div>
 
         <div class="headline_btn_clear">
@@ -27,7 +27,7 @@
 
   <div class="headline_user_info">
       <div class="headline_user_img">
-        <img src="./assets/img/logo.png">
+        <img src={{avatar}}>
       </div>
 
       <div id="user_headline_click" class="headline_user_status" *ngIf="showStatus" (click)="clickUserStatus()">

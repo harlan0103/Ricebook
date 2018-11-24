@@ -11,7 +11,7 @@
         </div>
   
         <div class="search_bar">
-          <textarea placeholder="Harlan0103"></textarea>
+          <textarea placeholder="{{profile.username}}"></textarea>
         </div>
   
         <div class="search_btn">
@@ -32,8 +32,8 @@
   <div class="profile_user_info">
 
     <div class="profile_img">
-      <img src="./assets/img/logo.png">
-      <input type="file" *ngIf="editable">
+      <img src={{profile.img}}>
+      <input type="file" accept="image/*" (change)="uploadImg($event)" *ngIf="editable">
     </div>
 
     <form class="profile_update_form" #updateForm="ngForm">
@@ -42,14 +42,7 @@
           <input type="text" class="form-control" id="account" name="account" disabled placeholder="{{profile.username}}">
           <div></div>
         </div>
-      
-        <div class="form-group">
-          <label>Dispaly name</label>
-          <input type="text" class="form-control" id="display" name="display" value="{{profile.displayname}}" [(ngModel)]="profile.displayname" *ngIf="editable">
-          <input type="text" class="form-control" id="display" name="display" value="{{profile.displayname}}" disabled *ngIf="diseditable">
-          <div></div>
-        </div>
-      
+
         <!--Email Address Editable-->
         <div class="form-group" *ngIf="editable">
             <label>Email</label>
