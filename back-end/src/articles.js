@@ -3,6 +3,7 @@ const Post = require('./model.js').Post
 const Comment = require('./model.js').Comment
 const Profile = require('./model.js').Profile
 const User = require('./model.js').User
+const uploadImage = require('./uploadCloudinary.js').uploadImage
 
 /*
 Function getArticles for endpoint GET '/articles.:id?'
@@ -87,12 +88,12 @@ const postNewArticle = (req, res) => {
 	else{
 		var author = currentUser
 		var date = new Date()
-		var body = req.body.article
-		var picture = req.body.picture
+		var body = req.body.text
+		var picture = req.body.image
 		var comment = []
 
 		if(!body){
-			return res.status(400).send("Miss post information")
+			return res.send({err: "miss content"})
 		}
 		else{
 			Post.find({author: currentUser}).exec(function(err, posts){
@@ -143,8 +144,8 @@ const putArticles = (req, res) => {
 	else{
 		// Find the post in post database
 		Post.find({id: postId}).exec(function(err, postObj){
-			if(!postObj){
-				res.send("No post with this id")
+			if(postObj.length == 0){
+				res.send({result: "Invalid postId"})
 				return
 			}
 			else{
@@ -246,8 +247,18 @@ const putArticles = (req, res) => {
 	}
 }
 
+/*
+Function to upload imgae for user post
+*/
+const upload = (req, res) => {
+	// Get uploaded image
+	var image = req.fileurl
+	res.send({image: image})
+}
+
 module.exports = (app) => {
 	app.get('/articles/:id?', getArticles)
 	app.put('/articles/:id', putArticles)
 	app.post('/article', postNewArticle)
+	app.put('/image', uploadImage('image'), upload)
 }
