@@ -1,6 +1,7 @@
 // This is profile.js which contains all user profile
 // Information except passwords which is in auth.js
 const Profile = require('./model.js').Profile
+const User = require('./model.js').User
 const uploadImage = require('./uploadCloudinary.js').uploadImage
 /*
 Function getHeadlines for endpoint '/headlines/:users?'
@@ -213,8 +214,17 @@ const putAvatar = (req, res) => {
 	}
 }
 
+// Get current login user object
+const getUser = (req, res) => {
+	var currentUser = req.user.username
+	User.find({username: currentUser}).exec(function(err, userObj){
+		res.send(userObj[0])
+	})
+}
+
 module.exports = (app) => {
 	//app.get('/headline/:user', getHeadline)
+	app.get('/user', getUser)
 	app.put('/headline', putHeadline)
 	app.get('/headlines/:users?', getHeadlines)
 	app.get('/email/:user?', getEmail)

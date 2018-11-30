@@ -6,7 +6,10 @@ require('./db.js')
 var userSchema = new mongoose.Schema({
 	username: String,
 	salt: String,
-	hash: String
+	hash: String,
+	auth: String,
+	authID: String,
+	status: String
 })
 
 // Create profile schema
