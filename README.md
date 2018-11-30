@@ -1,27 +1,28 @@
 # Ricebook
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.2.3.
+Ricebook a Facebook-like website allowing Rice student to share their posts with picture and comment to others’ posts.<br/>
+Website: https://ricebook-hl74-final.surge.sh/#/
 
-## Development server
+## Front-end build
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
++ Used **[Angular6](https://angular.io/)** as Front-end framework.
++ Designed user interface with **[Bootstrap](https://getbootstrap.com/)**.
 
-## Code scaffolding
+## Front-end test
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
++ Build unit test via **[Karma](https://karma-runner.github.io)**.
++ Run end-to-end test using **[Protractor](http://www.protractortest.org/)**.
 
-## Build
+## Back-end build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
++ Designed and constructed a RESTful API with **[Node.js](https://nodejs.org/en/)** and **[Express.js](https://github.com/expressjs/express)** framework.
++ Back-end server connected to **[mlab](https://mlab.com/)** interacted with **MongoDB**.
 
-## Running unit tests
+## Third-party login
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
++ Performed Google+ login with **[passport.js](http://www.passportjs.org/)** and **[OAtuth2.0](https://oauth.net/2/)**
 
-## Running end-to-end tests
+## Host
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
++ Deployed front-end app on **[Surge](https://surge.sh/)**
++ Hosted back-end server on **[Heroku](https://heroku.com/)**
