@@ -55,7 +55,9 @@ export class HeadlineComponent implements OnInit {
   fontend_getHeadline(){
     this._headlineService.backend_getHeadline().subscribe(data => {
       let response = data;
+      //console.log(response);
       this.userStatus = response.headlines[0].headline;
+      localStorage.setItem("currentUser", response.headlines[0].username);
     });
   }
 

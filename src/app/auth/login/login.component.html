@@ -42,6 +42,13 @@
     <div id="login_btn">
       <button id="usr_login_btn" [disabled]="loginForm.form.invalid" class="btn btn-primary" (click)="newLoginLogic()">LOG IN</button>
     </div>
-    
+
+    <div class="googleLoginBtn">
+        <button class="loginBtn loginBtn--google" (click)="googleLogin()">
+              Login with Google
+        </button>
+    </div>
   </form>
+
+
 </div>

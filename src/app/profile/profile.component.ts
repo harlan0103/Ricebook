@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { userProfile } from '../user_profile';
 import { ProfileService } from './profile.service';
 import { LoginService } from '../auth/login/login.service';
+import { flatten } from '@angular/compiler';
+import { MainService } from '../main/main.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -15,6 +18,15 @@ export class ProfileComponent implements OnInit {
   diseditable: boolean = true;
   // Set the default img
   defaultImg = "https://res.cloudinary.com/hnerpaq6a/image/upload/v1542926593/Owls.png";
+  // Conditions to show or hide link and unlink button
+  showLink: boolean = false;
+  showUnLink: boolean = false;
+  // Link account information
+  linkUsername: String = "";
+  linkPwd: String = "";
+  // Error in link
+  invalidMsg: String = ""
+  showMsg: boolean = false;
 
   profile: userProfile = {
     img: "",
@@ -44,7 +56,7 @@ export class ProfileComponent implements OnInit {
     this.diseditable = false;
   }
 
-  constructor(private _profileService: LoginService, private pService: ProfileService) {}
+  constructor(private _profileService: LoginService, private pService: ProfileService, private mainService: MainService, private router: Router) {}
 
   ngOnInit() {
     /**
@@ -54,6 +66,7 @@ export class ProfileComponent implements OnInit {
     this.front_getDob();
     this.front_getZip();
     this.front_getImg();
+    this.userLink();
   }
 
   /**
@@ -112,5 +125,82 @@ export class ProfileComponent implements OnInit {
         this.profile.img = data.avatar;
       });
     }
+  }
+
+  /**
+   * Check user link status
+   */
+  userLink(){
+    this.pService.backend_getUser().subscribe(data => {
+      //console.log(data);
+
+      // This is a third party login, show link button
+      if(data.authID != "" && data.status == ""){
+        this.showLink = true;
+        this.showUnLink = false;
+      }
+      // This is a linked account, show unlink button
+      else if(data.authID != "" && data.status == "linked"){
+        this.showLink = false;
+        this.showUnLink = true;
+      }
+      // This is a local account, not to show any button
+      else{
+        this.showLink = false;
+        this.showUnLink = false;
+      }
+    })
+  }
+
+  /**
+   * Link a logined third-party account with local account
+   */
+  linkAccount(){
+    //console.log(this.linkUsername + ";" + this.linkPwd);
+    // Now have login username and password
+    // Send to backend to merge two account
+    // Get return message
+    // 1.No such user  2.Wrong password  3.Account is not local  4.success
+    this.pService.backend_checkLink(this.linkUsername, this.linkPwd).subscribe(data => {
+      if(data.result == "INVALID"){
+        this.showInvalidMsg("Invalid user!");
+      }
+      else if(data.result == "WRONGPWD"){
+        this.showInvalidMsg("Wrong password!");
+      }
+      else if(data.result == "LINKED"){
+        this.showInvalidMsg("Account is linked!");
+      }
+      // Success status
+      else{
+        this.showMsg = false;
+        this.invalidMsg = "";
+        // Then clear user session and log out
+        //console.log("SUCCESS");
+        this.mainService.logOutUser().subscribe();
+        this.router.navigate(['/']);
+      }
+    });
+  }
+
+  /**
+   * Show invalid message
+   */
+  showInvalidMsg(msg){
+    this.invalidMsg = msg;
+    this.showMsg = true;
+  }
+
+  /**
+   * Unlink a third-party account with local account
+   */
+  unLinkAccount(){
+    // Call a function to unlink both account
+    this.pService.backend_unlink().subscribe(data => {
+      if(data.result == "success"){
+        this.mainService.logOutUser().subscribe();
+        this.router.navigate(['/']);
+      }
+    })
   }
 }

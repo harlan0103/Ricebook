@@ -51,7 +51,8 @@ export const route: Routes = [
     // Import HttpClientModule
     HttpClientModule,
     // Router
-    RouterModule.forRoot(route)
+    RouterModule.forRoot(route),
+    RouterModule.forRoot(route, {useHash: true})
   ],
   exports: [
     RouterModule,

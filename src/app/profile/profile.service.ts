@@ -56,4 +56,19 @@ export class ProfileService {
       withCredentials: true
     });
   }
+
+  // Get current user User object
+  backend_getUser(): Observable<any>{
+    return this.http.get(this._url + "user", httpOptions);
+  }
+  
+  // Check link account
+  backend_checkLink(username, pwd): Observable<any>{
+    return this.http.put(this._url + "merge", {username: username, pwd: pwd}, httpOptions);
+  }
+
+  // Unlink account
+  backend_unlink(): Observable<any>{
+    return this.http.put(this._url + "unlink", {}, httpOptions);
+  }
 }

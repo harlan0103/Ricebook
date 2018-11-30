@@ -58,4 +58,12 @@ export class LoginComponent implements OnInit {
       }
     })
   }
+
+  /**
+   * Login with google account
+   */
+  googleLogin(){
+    this._loginService.googleLogin();
+    //this.router.navigate(['/main']);
+  }
 }

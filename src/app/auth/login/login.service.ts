@@ -17,7 +17,7 @@ export class LoginService {
 
   //private Login_url = "http://localhost:3000/login";
   private Login_url = "https://hl74-ricebook-backend-final.herokuapp.com/login";
-
+  private _url = "https://hl74-ricebook-backend-final.herokuapp.com/"
   constructor(private http: HttpClient) { }
 
   /**
@@ -26,6 +26,13 @@ export class LoginService {
    */
   userLogin(User): Observable<any>{
     return this.http.post(this.Login_url, {username: User.username, password: User.pwd}, httpOptions);
+  }
+
+  /**
+   * Google login 
+   */
+  googleLogin(){
+    window.location.href = this._url + "login/auth/google";
   }
 
   /**
@@ -47,4 +54,5 @@ export class LoginService {
     let message = "Invalid username or wrong password!";
     return message;
   }
+  
 }

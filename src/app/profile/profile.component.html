@@ -90,10 +90,28 @@
             </div>
         </div>
 
+
         <!--Update button-->
         <div class="update_btn">
-            <button class="btn btn-primary" (click)="updateOnClick()" *ngIf="editable" [disabled]="updateForm.form.invalid">Update</button>
-            <button class="btn btn-primary" (click)="editOnClick()" *ngIf="diseditable">Edit</button>
+          <button class="btn btn-primary" (click)="updateOnClick()" *ngIf="editable" [disabled]="updateForm.form.invalid">Update</button>
+          <button class="btn btn-primary" (click)="editOnClick()" *ngIf="diseditable">Edit</button>
+        </div>
+
+        <!--Invalid message-->
+        <div class="alert alert-danger form-group" role="alert" *ngIf="showMsg">{{invalidMsg}}</div>
+        <!--Link account-->
+        <div class="form-group" *ngIf="showLink">
+          <input class="form-control" name="linkUsername" type="text" placeholder="Username" [(ngModel)]="linkUsername">
+        </div>
+
+        <div class="form-group" *ngIf="showLink">
+          <input class="form-control" name="linkPwd" type="password" placeholder="password" [(ngModel)]="linkPwd">
+        </div>
+
+        <!--Link button-->
+        <div class="update_btn">
+            <button class="btn btn-success" *ngIf="showLink" (click)="linkAccount()" [disabled]="!linkUsername || !linkPwd">LINK</button>
+            <button class="btn btn-success" *ngIf="showUnLink" (click)="unLinkAccount()">UNLINK</button>
         </div>
 
     </form>
