@@ -1,14 +1,19 @@
-<div class="MAINFRAME"> 
-    <!--Div for Registration and Login-->
-    <div class="CONTENTFRAME">
-        <div class="CONTENT_REGISTRATION">
-            <!--Add registration logic-->
-            <app-registration></app-registration>
-        </div>
-        
-        <div class="CONTENT_LOGIN">
-            <!--Add login component-->
-            <app-login></app-login>
+<div class="ui middle aligned grid MAINFRAME">
+    <div class="column">
+        <div class="ui placeholder segment">
+            <div class="ui two column very relaxed stackable grid">
+                <div class="column">
+                    <app-registration></app-registration>
+                </div>
+                <div class="middle aligned column">
+                    <app-login></app-login>
+                </div>
+            </div>
+            <div class="ui vertical divider">
+                Or
+            </div>
         </div>
     </div>
 </div>
+
+

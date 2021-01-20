@@ -44,3 +44,35 @@
     <app-following class="main_following_module" (PostListEvent)="postListEvent($event)"></app-following>
   </div> 
 </div>
+
+<!-- Header menu -->
+<div class="ui stackable blue inverted secondary menu">
+  <div class="ui container">
+    <div class="header item">
+      <h2>Ricebook</h2>
+    </div>
+
+    <div class="item">
+      <div class="ui fluid category search">
+        <div class="ui icon input">
+          <input class="prompt" type="text" placeholder="Search Ricebook...">
+          <i class="search icon"></i>
+        </div>
+      </div>
+    </div>
+    
+    <div class="right item">
+     
+      <a class="item">
+        <span routerLink="/profile">Profile</span>
+      </a>
+
+      <a class="item">
+        <span id="log_out_btn" (click)="Logout()">Logout</span>
+      </a>
+      
+    </div>
+
+  </div>
+</div>
+

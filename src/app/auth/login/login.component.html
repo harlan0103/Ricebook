@@ -1,54 +1,64 @@
-<div id="login-form">
+<!-- Modified with semantic-ui -->
+<div>
 
   <!--ngForm contains the validation for entire form-->
-  <form #loginForm="ngForm" id="user_login_form">
+  <form #loginForm="ngForm" class="ui large form warning error">
 
     <!--ALERT-->
     <!--Alert user if user enter a invalid username or wrong password-->
-    <div class="alert alert-danger" role="alert" id="user_login_invalid" *ngIf="showInvalidMsg">
+    <div class="ui error message" role="alert" *ngIf="showInvalidMsg">
       {{errorMessage}}
     </div>
 
-    <div class="alert alert-warning" id="user_login_invalid">
-      <span>please log in with username</span>
+    <!-- Title -->
+    <div class="field">
+      <h1 class="ui blue header">
+        Ricebook
+      </h1>
     </div>
-    <!--USERNAME-->
-    <div class="form-group" id="login_username">
-      <label>USERNAME</label><br/>
-      <input type="text" #username="ngModel"
-      class="form-control" [class.is-invalid]="username.invalid && username.touched || showInvalidMsg"
-      id="login-username" name="login-username" required
-      [(ngModel)]="loginModel.username">
-      <!--Error message for invalid username input-->
-      <div *ngIf="username.errors && (username.invalid || username.touched)" [class.d-none]="username.valid || username.untouched">
-        <small class="text-danger" *ngIf="username.errors.required">Username is required</small>
+    
+
+    <!-- Warning message -->
+    <div class="field">
+      <div class="ui warning message">
+        <p>Log in with username.</p>
       </div>
     </div>
 
-    <!--PASSWORD-->
-    <div class="form-group" id="login_password">
-      <label>PASSWORD</label><br/>
-      <input type="password" #pwd="ngModel"
-      class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched || showInvalidMsg"
-      id="login-pwd" name="login-pwd" required
-      [(ngModel)]="loginModel.pwd">
-      <!--Error message for invalid password input-->
-      <div *ngIf="pwd.errors && (pwd.invalid || pwd.touched)" [class.d-none]="pwd.valid || pwd.untouched">
-        <small class="text-danger" *ngIf="pwd.errors.required">Password is required</small>
+    <!-- Username input field -->
+    <div [ngClass]="username.errors && (username.invalid && username.touched) > 0 ? 'field error' : 'field'">
+      <label>USERNAME</label>
+      <div class="ui left icon input">
+        <input type="text" name="login-username" required
+        [(ngModel)]="loginModel.username"
+        #username="ngModel" />
+        <i class="user icon"></i>
       </div>
     </div>
 
-    <!--LOGIN BUTTON-->
-    <div id="login_btn">
-      <button id="usr_login_btn" [disabled]="loginForm.form.invalid" class="btn btn-primary" (click)="newLoginLogic()">LOG IN</button>
+    <!-- Password input field -->
+    <div [ngClass]="pwd.errors && (pwd.invalid && pwd.touched) > 0 ? 'field error' : 'field'">
+      <label>PASSWORD</label>
+      <div class="ui left icon input">
+        <input type="password" name="login-pwd" required
+        [(ngModel)]="loginModel.pwd"
+        #pwd="ngModel" />
+        <i class="lock icon"></i>
+      </div>
     </div>
 
-    <div class="googleLoginBtn">
-        <button class="loginBtn loginBtn--google" (click)="googleLogin()">
-              Login with Google
-        </button>
+    <!-- Login btn -->
+    <div class="field">
+      <button [disabled]="loginForm.form.invalid" class="fluid ui primary button" (click)="newLoginLogic()">LOG IN</button>
     </div>
+
+    <!-- Google login btn -->
+    <div class="field">
+      <button class="fluid ui google plus button" (click)="googleLogin()">
+        <i class="google plus icon"></i>
+        Google Plus
+      </button>
+    </div>
+
   </form>
-
-
 </div>

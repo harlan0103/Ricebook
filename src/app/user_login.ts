@@ -1,5 +1,5 @@
 /*
-Create a class UserLogin initilize login component
+User login model class
 */
 export class UserLogin {
     public username: string

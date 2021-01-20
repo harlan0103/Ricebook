@@ -1,3 +1,4 @@
+import { ThrowStmt } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { UserInfo } from '../../user_registration';
 import { RegistrationService } from './registration.service';
@@ -35,8 +36,12 @@ export class RegistrationComponent implements OnInit {
    * Check the duplicate user status
    */
   registSuccess(){
-    //console.log(this.userModel);
+    console.log(this.userModel);
+    this.registStatus = true;
+    this.duplicateUser = false;
     // Get the registration information and send it to the service
+
+    /*
     this._registerService.register(this.userModel).subscribe(value => {
       //console.log(value);
       if(value.status == "success"){
@@ -51,5 +56,6 @@ export class RegistrationComponent implements OnInit {
     }, err => {
       //console.log(err);
     })
+    */
   }
 }

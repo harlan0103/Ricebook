@@ -13,5 +13,4 @@ export class AuthComponent implements OnInit {
   	}
 
   	title = "RiceBook";
-
 }

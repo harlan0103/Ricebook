@@ -13,7 +13,7 @@ export class LoginComponent implements OnInit {
   // Error message
   public errorMessage:string;
 
-  //new login model
+  // Create a new login model
   loginModel = new UserLogin();
   // Create two valid param to check if username and password are valid
   validUser: boolean = false;
@@ -38,6 +38,8 @@ export class LoginComponent implements OnInit {
    * Check the invalid status and show error message
    */
   newLoginLogic(){
+    console.log(this.loginModel);
+    /*
     this._loginService.userLogin(this.loginModel).subscribe(data => {
       if(data.result == "INVALID"){
         //console.log("No User");
@@ -57,13 +59,15 @@ export class LoginComponent implements OnInit {
         this.router.navigate(['/main']);
       }
     })
+    */
   }
 
   /**
    * Login with google account
    */
   googleLogin(){
-    this._loginService.googleLogin();
+    console.log("login with google")
+    //this._loginService.googleLogin();
     //this.router.navigate(['/main']);
   }
 }

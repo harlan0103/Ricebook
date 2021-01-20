@@ -1,129 +1,135 @@
-<div class="REGISTRATION_TITLE">
-    <form #registForm="ngForm"> <!--We have the reference of ngForm by assign the variable name #registForm-->
-        <div class="alert alert-success" *ngIf="registStatus">
-            <span id="regi_success"><b>DING!  </b>Welcome {{userModel.name}}</span>
-        </div>
-        <div class="alert alert-danger" *ngIf="duplicateUser">
-            <span><b>Error! </b>Duplicate user!</span>
-        </div>
-        <!--ACCOUNT NAME-->
-        <div class="form-group" id="regist_account_name">
-            <!--This is the part for user account name-->
-            <label>ACCOUNT NAME *</label><br/>
-            <!--[(ngModel)] is two way binding-->
-            <input type="text" #name="ngModel" 
-                class="form-control" [class.is-invalid]="name.invalid && name.touched"
-                id="account" name="account" required 
-                [(ngModel)]="userModel.name">
-            <!--
-                This div contains error message will pop up if name has error when name is invliad or name has been touched
-                The class will change to "d-none" when name is vliad or name has never been touched
-            -->
-            <div *ngIf="name.errors && (name.invalid || name.touched)" [class.d-none]="name.valid || name.untouched">
-                <!--This small tag contains error message will pop up if name is not entered-->
-                <small class="text-danger" *ngIf="name.errors.required">Name is required</small>
+<div>
+    <form #registForm="ngForm" class="ui form"> <!--We have the reference of ngForm by assign the variable name #registForm-->
+
+        <!-- Registration status -->
+        <div class="field">
+            <div *ngIf="registStatus" class="ui positive message">
+                <div class="header">DING!</div>
+                <p>Welcome {{userModel.name}}!</p>                
             </div>
         </div>
 
-        <!--DISPLAY NAME-->
-        <div class="form-group">
-            <label>DISPLAY NAME</label><br/>
-            <input type="text" 
-                class="form-control" id="display_name" name="display" [(ngModel)]="userModel.display">
+        <div class="field">
+            <div *ngIf="duplicateUser" class="ui negative message">
+                <div class="header">ERROR!</div>
+                <p>Duplicate user!</p>                
+            </div>
+        </div>
+
+        <!-- ACCOUNT NAME -->
+        <div [ngClass]="name.errors && (name.invalid && name.touched) > 0 ? 'field error' : 'field'">
+            <label>USERNAME *</label>
+            <input type="text" name="account" required
+                [(ngModel)]="userModel.name"
+                #name="ngModel"/>
+        </div>
+
+        <!-- DISPLAY NAME -->
+        <div class="field">
+            <label>DISPLAY NAME</label>
+            <input type="text" name="display"
+                [(ngModel)]="userModel.display"/>
         </div>
         
-        <!--EMAIL ADDRESS-->
-        <div class="form-group">
-            <label>EMIAL ADDRESS *</label><br/>
-            <input type="text" #email="ngModel"
-                class="form-control" [class.is-invalid]="email.invalid && email.touched"
-                id="email" name="email" placeholder="username@ricebook.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" required 
-                [(ngModel)]="userModel.email">
-            <!--Error message--> 
-            <div *ngIf="email.errors && (email.invalid || email.touched)" [class.d-none]="email.vliad || email.untouched">
-                <small class="text-danger" *ngIf="email.errors.required">Email address is required</small>
-                <small class="text-danger" *ngIf="email.errors.pattern">Please enter a valid email address</small>
+        <!-- EMAIL ADDRESS -->
+        <div [ngClass]="email.errors && (email.invalid && email.touched) > 0 ? 'field error' : 'field'">
+            <label>EMIAL ADDRESS *</label>
+            <input type="email" name="email" required
+                [(ngModel)]="userModel.email"
+                placeholder="username@ricebook.com" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+                #email="ngModel"/>
+        </div>
+        <!-- Handle mismatch email addres -->
+        <div class="field">
+            <div *ngIf="email.errors && email.touched">
+                <div *ngIf="email.errors.pattern">
+                    <div class="ui small negative message">
+                        <p>Invalid email address</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- PHONE NUMBER -->
+        <div [ngClass]="phone.errors && (phone.invalid && phone.touched) > 0 ? 'field error' : 'field'">
+            <label>PHONE NUMBER *</label>
+            <input type="text" name="phone" required
+                [(ngModel)]="userModel.phone"
+                placeholder="000-000-0000" pattern="\d{3}[\-]\d{3}[\-]\d{4}"
+                #phone="ngModel"/>
+        </div>
+        <!-- Handle mismatch phone number -->
+        <div class="field">
+            <div *ngIf="phone.errors && phone.touched">
+                <div *ngIf="phone.errors.pattern">
+                    <div class="ui small negative message">
+                        <p>Invalid phone number</p>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!--PHONE NUMBER-->
-        <div class="form-group">
-            <label>PHONE NUMBER *</label><br/>
-            <input type="text" #phone="ngModel"
-                class="form-control" [class.is-invalid]="phone.invalid && phone.touched"
-                id="phone" name="phone" placeholder="123-123-1233" pattern="\d{3}[\-]\d{3}[\-]\d{4}" required
-                [(ngModel)]="userModel.phone">
-                <!--The pattenr for phone number is 123-123-1233-->
-            <!--Error message-->
-            <div *ngIf="phone.errors && (phone.invalid || phone.touched)" [class.d-none]="phone.valid || phone.untouched">
-                <small class="text-danger" *ngIf="phone.errors.required">Phone number is required</small>
-                <small class="text-danger" *ngIf="phone.errors.pattern">Phone number must follow the pattern: 123-123-1233</small>
-            </div>
+        <!-- DATE OF BIRTH -->
+        <div class="field">
+            <label>DATE OF BIRTH *</label>
+            <input type="date" name="birth" required
+                [(ngModel)]="userModel.birth"
+                #date="ngModel"/>
         </div>
 
-        <!--DATE OF BIRTH-->
-        <div class="form-group">
-            <label>DATE OF BIRTH *</label><br/>
-            <input type="date" #date="ngModel"
-                class="form-control" id="birth" name="birth" required [(ngModel)]="userModel.birth">
+        <!-- ZIPCODE -->
+        <div [ngClass]="zipcode.errors && (zipcode.invalid && zipcode.touched) > 0 ? 'field error' : 'field'">
+            <label>ZIPCODE *</label>
+            <input type="text" name="zipcode" required
+                [(ngModel)]="userModel.zipcode"
+                placeholder="77030" pattern="\d{5}"
+                #zipcode="ngModel"/>
         </div>
-
-        <!--ZIPCODE-->
-        <div class="form-group">
-            <label>ZIPCODE *</label><br/>
-            <input type="text" #zipcode="ngModel"
-                class="form-control" [class.is-invalid]="zipcode.invalid && zipcode.touched"
-                id="zipcode" name="zipcode" placeholder="77030" pattern="\d{5}" required 
-                [(ngModel)]="userModel.zipcode">
-                <!--The pattenr of zipcode should be 5 digit numbers-->
-            <!--Error message for invalid and mispattern-->
-            <div *ngIf="zipcode.errors && (zipcode.invalid || zipcode.touched)" [class.d-none]="zipcode.valid || zipcode.untouched">
-                <small class="text-danger" *ngIf="zipcode.errors.required">Zipcode is required</small>
-                <small class="text-danger" *ngIf="zipcode.errors.pattern">Zipcode must be 5 digit numbers</small>
+        <!-- Handle mismatch phone number -->
+        <div class="field">
+            <div *ngIf="zipcode.errors && zipcode.touched">
+                <div *ngIf="zipcode.errors.pattern">
+                    <div class="ui small negative message">
+                        <p>Invalid zipcode</p>
+                    </div>
+                </div>
             </div>
         </div>
 
         <!--PASSWORD-->
-        <div class="form-group">
-            <label>PASSWORD *</label><br/>
-            <input type="password" #pwd="ngModel"
-                class="form-control" [class.is-invalid]="pwd.invalid && pwd.touched"
-                id="pwd" name="pwd" required 
-                [(ngModel)]="userModel.pwd">
-            <!--Error message for password required-->
-            <div *ngIf="pwd.errors && (pwd.invliad || pwd.touched)" [class.d-none]="pwd.valid || pwd.untouched">
-                <small class="text-danger" *ngIf="pwd.errors.required">Password is required</small>
-            </div>
+        <div [ngClass]="pwd.errors && (pwd.invalid && pwd.touched) > 0 ? 'field error' : 'field'">
+            <label>PASSWORD *</label>
+            <input type="password" name="pwd" required
+                [(ngModel)]="userModel.pwd"
+                #pwd="ngModel"/>
         </div>
-
+        
         <!--
             User input confirm password field
             Check for password validation
             And check password matching with confirm password
             Create a new directive named pwdValidator to test password match
         -->
-        <!--CONFIRM PASSWORD-->
-        <div class="form-group">
-            <label>CONFIRM PASSWORD *</label><br/>
-            <input type="password" #repwd="ngModel"
-                class="form-control" [class.is-invalid]="repwd.invalid && repwd.touched" pwdValidator="pwd"
-                id="repwd" name="repwd" required 
-                [(ngModel)]="userModel.repwd">
-            <!--Error message for confirm password required and password mismatch-->
-            <div >
-                <small class="text-danger" *ngIf="repwd.touched && repwd.errors?.notEqual">Password and confirm Password does not match</small>
+        <!-- CONFIRM PASSWORD -->
+        <div [ngClass]="repwd.errors && (repwd.invalid && repwd.touched) > 0 ? 'field error' : 'field'">
+            <label>CONFIRM PASSWORD *</label>
+            <input type="password" name="repwd" required
+                [(ngModel)]="userModel.repwd" pwdValidator="pwd"
+                #repwd="ngModel"/>
+        </div>
+        <div class="field">
+            <div *ngIf="repwd.touched && repwd.errors?.notEqual">
+                <div class="ui negative small message">
+                    <p>Password and confirm password does not match</p>
+                </div> 
             </div>
         </div>
 
-        <div id="registration_btns">
-            <!--REGISTRATION BUTTON-->
-            <div id="registration_btn">
-                <button id="regi_btn" [disabled]="registForm.form.invalid" class="btn btn-primary" (click)="registSuccess()">REGISTER</button>
-            </div>
-            <!--CLEAR BUTTON-->
-            <div id="clear_btn">
-                <button class="btn btn-primary" (click)="registerClear()">CLEAR</button>
-            </div>
+        <!-- Registration button -->
+        <div class="field">
+            <button class="ui right floated button" (click)="registerClear()">CLEAR</button>
+            <button class="ui left floated positive button" [disabled]="registForm.form.invalid" (click)="registSuccess()">REGISTER</button>
         </div>
+        
     </form>
 </div>

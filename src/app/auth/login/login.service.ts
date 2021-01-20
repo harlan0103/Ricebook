@@ -15,9 +15,9 @@ const httpOptions = {
 
 export class LoginService {
 
-  //private Login_url = "http://localhost:3000/login";
-  private Login_url = "https://hl74-ricebook-backend-final.herokuapp.com/login";
-  private _url = "https://hl74-ricebook-backend-final.herokuapp.com/"
+  private Login_url = "http://localhost:3000/login";
+  //private Login_url = "https://hl74-ricebook-backend-final.herokuapp.com/login";
+  //private _url = "https://hl74-ricebook-backend-final.herokuapp.com/"
   constructor(private http: HttpClient) { }
 
   /**
@@ -32,7 +32,7 @@ export class LoginService {
    * Google login 
    */
   googleLogin(){
-    window.location.href = this._url + "login/auth/google";
+    window.location.href = this.Login_url + "/auth/google";
   }
 
   /**

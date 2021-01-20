@@ -15,8 +15,8 @@ const httpOptions = {
 
 export class MainService {  
   constructor(private http: HttpClient) { }
-  //private _url = "http://localhost:3000/";
-  private _url = "https://hl74-ricebook-backend-final.herokuapp.com/";
+  private _url = "http://localhost:3000/";
+  //private _url = "https://hl74-ricebook-backend-final.herokuapp.com/";
 
   logOutUser(){
     localStorage.setItem("currentUser", "");
